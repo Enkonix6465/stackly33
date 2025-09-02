@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home1 from "./Pages/Home1";
@@ -15,19 +15,32 @@ import Stress from "./Pages/Stress";
 import Holistic from "./Pages/Holistic";
 import Wellness from "./Pages/Wellness";
 import AdminDashboard from "./Pages/AdminDashboard";
-import Login from "./Pages/Login";
 import Article from "./Pages/Article";
-
+import Login from "./Pages/Login";
 
 // Import Dark Mode Context
 import { DarkModeProvider } from "./context/Darkmodecontect";
+
+// Helper to hide header/footer on login page
+function Layout({ children }) {
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname === "/" || location.pathname === "/login";
+  return (
+    <>
+      {!hideHeaderFooter && <Header />}
+      <main className="min-h-[calc(100vh-128px)]">
+        {children}
+      </main>
+      {!hideHeaderFooter && <Footer />}
+    </>
+  );
+}
 
 function App() {
   return (
     <DarkModeProvider>
       <Router>
-        <Header />
-        <main className="min-h-[calc(100vh-128px)]">
+        <Layout>
           <Routes>
             <Route path="/home1" element={<Home1 />} />
             <Route path="/home2" element={<Home2 />} />
@@ -44,11 +57,10 @@ function App() {
             <Route path="/wellness" element={<Wellness />} />
             <Route path="/AdminDashboard" element={<AdminDashboard />} />
             <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/Article" element={<Article />} />
-
           </Routes>
-        </main>
-        <Footer />
+        </Layout>
       </Router>
     </DarkModeProvider>
   );
