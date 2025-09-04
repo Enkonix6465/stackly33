@@ -6,181 +6,388 @@ import { GiMeditation, GiFruitBowl, GiRunningShoe } from 'react-icons/gi';
 import image from  '../assets/team1.jpg';
 import image2 from  '../assets/team2.jpg';
 import image3 from  '../assets/team3.jpg';
-import vedio from '../assets/about.mp4';
+import vedio from '../assets/Home22.mp4';
 import backgroundImage from '../assets/B2.jpg';
 import image4 from '../assets/test1.jpg';
 import image5 from '../assets/test2.jpg';
 import image6 from '../assets/test3.jpg';
+import image7 from '../assets/HW2.jpg';
+import image8 from '../assets/HW3.jpg';
 
-const THEME_KEY = 'theme';
-
-// Translations and language helpers
-const TRANSLATIONS = {
+// Translations for all content
+const translations = {
   en: {
-    heroTitle: 'About Our Wellness Journey',
-    heroSubtitle: 'Where science meets compassion to create transformative health experiences',
-    heroServices: 'Our Services',
-    heroContact: 'Contact Us',
-    storyHeading: 'Our Story',
-    storyParagraph: 'Founded in 2008, Vitality Wellness began as a small clinic with a big vision: to redefine holistic health by blending ancient wisdom with modern science. What started as a passion project between three health practitioners has grown into a thriving wellness center serving thousands each year, yet we\'ve never lost our personal touch. Over the years, we have expanded our team, built specialized programs, and created a nurturing environment where every individual feels valued. From personalized wellness plans to community workshops, our journey has always been about inspiring transformation. Today, we stand as a trusted hub for those seeking balance, healing, and empowerment — proving that true wellness is not a destination but a lifelong journey.',
-    storyCta1: 'View Our Services',
-    storyCta2: 'Contact Us',
-    philosophyHeading: 'Our Philosophy',
-    philosophyParagraph: 'We believe true wellness comes from addressing the whole person – body, mind, and spirit – with personalized, evidence-based care. Our philosophy is rooted in prevention, empowerment, and holistic healing practices that honor your individuality',
-    philosophyCard1Title: 'Whole-Person Care',
-    philosophyCard1Desc: 'We look beyond symptoms to address root causes and create sustainable health.',
-    philosophyCard2Title: 'Prevention First',
-    philosophyCard2Desc: 'Our focus is on building health rather than just fighting disease.',
-    philosophyCard3Title: 'Empowerment',
-    philosophyCard3Desc: 'We equip you with knowledge and tools for lifelong wellbeing.',
-    numbersHeading: 'By The Numbers',
-    numbersSubtitle: 'Our impact in the wellness community speaks for itself',
-    stat1: 'Happy Clients',
-    stat2: 'Years Experience',
-    stat3: 'Expert Practitioners',
-    stat4: 'Natural Methods',
-    teamHeading: 'Meet The Team',
-    teamSubtitle: 'Our diverse team of experts brings together decades of experience across multiple healing disciplines.',
-    team1Name: 'Dr. Deepak Chopra',
-    team1Role: 'Integrative Physician',
-    team1Hover: 'Specializes in functional medicine and nutrition-based healing',
-    team2Name: 'Dr. Andrew Weil',
-    team2Role: 'Lead Physical Therapist',
-    team2Hover: 'Expert in movement therapy and pain management',
-    team3Name: 'Dr. Mark Hyman',
-    team3Role: 'Mindfulness Director',
-    team3Hover: 'Developed our acclaimed stress reduction programs',
-    testimonialsHeading: 'In Their Words',
-    testimonialsSubtitle: 'Hear from those who\'ve experienced the Vitality difference. Our clients share their transformative journeys, improved health, and holistic wellness stories that reflect our commitment to mind-body harmony.',
-    testimonial1Name: 'Sarah Johnson',
-    testimonial1Role: 'Yoga Practitioner',
-    testimonial1Quote: 'Vitality Wellness transformed my approach to health. Their holistic methods helped me find balance in both body and mind.',
-    testimonial2Name: 'Michael Chen',
-    testimonial2Role: 'Fitness Enthusiast',
-    testimonial2Quote: 'The personalized nutrition plan was a game-changer for my energy levels and overall performance.',
-    testimonial3Name: 'Dr. Emily Rodriguez',
-    testimonial3Role: 'Medical Professional',
-    testimonial3Quote: 'As a physician, I appreciate their evidence-based yet compassionate approach to wellness.',
-    ctaHeading: 'Begin Your Wellness Journey',
-    ctaParagraph: 'Ready to experience the Vitality difference? We\'re here to guide you every step of the way.',
-    ctaBtn1: 'Book a Consultation',
-    ctaBtn2: 'Explore Programs'
+    hero: {
+      heading: "About Vitality Wellness",
+      sub: "Where science meets compassion to create transformative health experiences",
+      services: "Our Services",
+      contact: "Contact Us",
+    },
+    story: {
+      heading: "Our Story",
+      title: "Wellness Beyond Beauty",
+      desc: "Since our beginnings in 2008, we’ve been passionate about guiding people toward healthier, more balanced lives. What started as a small wellness retreat has blossomed into a trusted sanctuary for relaxation, healing, and self-care. We believe true wellness is more than skin deep — it’s the harmony of body, mind, and spirit. Our holistic therapies and natural treatments are designed to help you recharge, find balance, and embrace mindful living every day.",
+      explore: "Explore Services →",
+      contact: "Contact Us",
+    },
+    philosophy: {
+      heading: "Our Philosophy",
+      desc: "We believe true wellness comes from addressing the whole person – body, mind, and spirit – with personalized, evidence-based care. Our philosophy is rooted in prevention, empowerment, and holistic healing practices that honor your individuality.",
+      timeline: [
+        {
+          icon: <FaHeartbeat className="text-4xl text-purple-400" />,
+          title: "Whole-Person Care",
+          desc: "We look beyond symptoms to address root causes and create sustainable health.",
+        },
+        {
+          icon: <GiFruitBowl className="text-4xl text-purple-500" />,
+          title: "Prevention First",
+          desc: "Our focus is on building health rather than just fighting disease.",
+        },
+        {
+          icon: <GiRunningShoe className="text-4xl text-purple-600" />,
+          title: "Empowerment",
+          desc: "We equip you with knowledge and tools for lifelong wellbeing.",
+        },
+      ],
+    },
+    visionMission: {
+      heading: "Our Vision & Mission",
+      vision: {
+        badge: "01",
+        heading: "Our Vision",
+        desc: "To redefine wellness by creating a world where balance, peace, and vitality are accessible to all. We envision communities embracing mindfulness, nutrition, and self-care as everyday practices.",
+      },
+      mission: {
+        badge: "02",
+        heading: "Our Mission",
+        desc: "To deliver transformative health programs and personalized care that inspires people to lead healthier, happier, and more fulfilling lives. Our mission is to make wellness simple, sustainable, and joyful.",
+      },
+      sub: "Empowering holistic wellness through innovation, care, and mindful living.",
+    },
+    numbers: {
+      heading: "By The Numbers",
+      desc: "Our impact in the wellness community speaks for itself",
+      stats: [
+        { value: "10K+", label: "Happy Clients", icon: <FaUsers className="text-3xl" /> },
+        { value: "15+", label: "Years Experience", icon: <FaAward className="text-3xl" /> },
+        { value: "50+", label: "Expert Practitioners", icon: <FaHandsHelping className="text-3xl" /> },
+        { value: "100%", label: "Natural Methods", icon: <FaLeaf className="text-3xl" /> }
+      ],
+    },
+    team: {
+      heading: "Meet The Team",
+      desc: "Our diverse team of experts brings together decades of experience across multiple healing disciplines.",
+      members: [
+        {
+          name: "Dr. Deepak Chopra",
+          role: "Integrative Physician",
+          img: image3,
+          hoverText: "Specializes in functional medicine and nutrition-based healing",
+        },
+        {
+          name: "Dr. Andrew Weil",
+          role: "Lead Physical Therapist",
+          img: image2,
+          hoverText: "Expert in movement therapy and pain management",
+        },
+        {
+          name: "Dr. Mark Hyman",
+          role: "Mindfulness Director",
+          img: image,
+          hoverText: "Developed our acclaimed stress reduction programs",
+        },
+      ],
+    },
+    testimonials: {
+      heading: "Voices of Transformation",
+      desc: "Real stories. Real growth. Hear how lives have changed through our holistic approach to wellness and balance.",
+      items: [
+        {
+          img: image4,
+          name: "Sarah Johnson",
+          role: "Yoga Practitioner",
+          quote: "Vitality Wellness transformed my approach to health. Their holistic methods helped me find balance in both body and mind.",
+        },
+        {
+          img: image5,
+          name: "Michael Chen",
+          role: "Fitness Enthusiast",
+          quote: "The personalized nutrition plan was a game-changer for my energy levels and overall performance.",
+        },
+        {
+          img: image6,
+          name: "Dr. Emily Rodriguez",
+          role: "Medical Professional",
+          quote: "As a physician, I appreciate their evidence-based yet compassionate approach to wellness.",
+        }
+      ],
+    },
+    join: {
+      heading: "Begin Your Wellness Journey",
+      sub: "Unlock your potential and embrace a healthier lifestyle. We're here to guide you with balance, energy, and transformation.",
+      book: "Book a Consultation",
+      explore: "Explore Programs",
+    },
+    themeToggle: {
+      dark: "Dark Mode",
+      light: "Light Mode",
+    },
   },
   ar: {
-    heroTitle: 'رحلتنا نحو العافية',
-    heroSubtitle: 'حيث يلتقي العلم بالتعاطف لخلق تجارب صحية مُحوِّلة',
-    heroServices: 'خدماتنا',
-    heroContact: 'اتصل بنا',
-    storyHeading: 'قصتنا',
-    storyParagraph: 'تأسست Vitality Wellness في عام 2008 كعيادة صغيرة برؤية كبيرة: إعادة تعريف الصحة الشاملة من خلال مزج الحكمة القديمة بالعلم الحديث. ما بدأ كمشروع شغوف بين ثلاثة ممارسين للصحة أصبح مركز عافية مزدهرًا يخدم الآلاف سنويًا، دون أن نفقد لمستنا الشخصية. على مر السنين، قمنا بتوسيع فريقنا وبناء برامج متخصصة وخلق بيئة داعمة يشعر فيها كل فرد بالتقدير. من خطط العافية الشخصية إلى ورش العمل المجتمعية، كانت رحلتنا دائمًا حول إلهام التحول. اليوم، نقف كمركز موثوق به للباحثين عن التوازن والشفاء والتمكين — مما يثبت أن العافية الحقيقية ليست وجهة بل رحلة حياة.',
-    storyCta1: 'عرض خدماتنا',
-    storyCta2: 'اتصل بنا',
-    philosophyHeading: 'فلسفتنا',
-    philosophyParagraph: 'نؤمن بأن العافية الحقيقية تأتي من الاهتمام بالشخص ككل — الجسد والعقل والروح — برعاية مخصصة قائمة على الأدلة. ترتكز فلسفتنا على الوقاية والتمكين والممارسات العلاجية الشاملة التي تحترم تفرّدك.',
-    philosophyCard1Title: 'رعاية شاملة للفرد',
-    philosophyCard1Desc: 'نتجاوز الأعراض لمعالجة الأسباب الجذرية وبناء صحة مستدامة.',
-    philosophyCard2Title: 'الوقاية أولاً',
-    philosophyCard2Desc: 'تركيزنا على بناء الصحة بدلاً من مجرد محاربة المرض.',
-    philosophyCard3Title: 'التمكين',
-    philosophyCard3Desc: 'نزودك بالمعرفة والأدوات من أجل رفاهية دائمة.',
-    numbersHeading: 'بالأرقام',
-    numbersSubtitle: 'أثرنا في مجتمع العافية يتحدث عن نفسه',
-    stat1: 'عملاء سعداء',
-    stat2: 'سنوات خبرة',
-    stat3: 'ممارسون خبراء',
-    stat4: 'طرق طبيعية',
-    teamHeading: 'تعرف على الفريق',
-    teamSubtitle: 'يجمع فريقنا المتنوع بين عقود من الخبرة عبر عدة تخصصات علاجية.',
-    team1Name: 'الدكتور ديباك شوبرا',
-    team1Role: 'طبيب تكاملي',
-    team1Hover: 'متخصص في الطب الوظيفي والعلاج بالتغذية',
-    team2Name: 'الدكتور أندرو ويل',
-    team2Role: 'رئيس العلاج الطبيعي',
-    team2Hover: 'خبير في علاج الحركة وإدارة الألم',
-    team3Name: 'الدكتور مارك هايمان',
-    team3Role: 'مدير اليقظة الذهنية',
-    team3Hover: 'طوّر برامجنا المرموقة لتقليل التوتر',
-    testimonialsHeading: 'على لسانهم',
-    testimonialsSubtitle: 'اسمع من أولئك الذين اختبروا اختلاف Vitality. يشارك عملاؤنا رحلاتهم التحولية وصحتهم المُحسنة وقصص العافية الشاملة التي تعكس التزامنا بتناغم العقل والجسد.',
-    testimonial1Name: 'سارة جونسون',
-    testimonial1Role: 'ممارسة يوجا',
-    testimonial1Quote: 'غيرت Vitality Wellness نهجي للصحة. ساعدتني أساليبهم الشاملة على إيجاد التوازن بين الجسد والعقل.',
-    testimonial2Name: 'مايكل تشين',
-    testimonial2Role: 'مهتم باللياقة',
-    testimonial2Quote: 'كانت خطة التغذية المخصصة نقطة تحول في مستويات طاقتي وأدائي العام.',
-    testimonial3Name: 'الدكتورة إميلي رودريغيز',
-    testimonial3Role: 'طبيبة',
-    testimonial3Quote: 'بصفتي طبيبة، أقدّر نهجهم القائم على الأدلة والرحيم في آن واحد.',
-    ctaHeading: 'ابدأ رحلتك نحو العافية',
-    ctaParagraph: 'هل أنت مستعد لتجربة اختلاف Vitality؟ نحن هنا لإرشادك في كل خطوة.',
-    ctaBtn1: 'احجز استشارة',
-    ctaBtn2: 'استكشف البرامج'
+    hero: {
+      heading: "عن Vitality Wellness",
+      sub: "حيث يلتقي العلم مع التعاطف لخلق تجارب صحية تحويلية",
+      services: "خدماتنا",
+      contact: "اتصل بنا",
+    },
+    story: {
+      heading: "قصتنا",
+      title: "العافية تتجاوز الجمال",
+      desc: "منذ بدايتنا في عام 2008، كنا شغوفين بإرشاد الناس نحو حياة أكثر صحة وتوازنًا. ما بدأ كمنتجع صغير للعافية أصبح ملاذًا موثوقًا للاسترخاء والشفاء والرعاية الذاتية. نؤمن أن العافية الحقيقية أعمق من الجمال الخارجي — إنها انسجام الجسد والعقل والروح. علاجاتنا الشاملة والطبيعية مصممة لمساعدتك على إعادة الشحن، وإيجاد التوازن، واحتضان الحياة الواعية كل يوم.",
+      explore: "استكشف الخدمات →",
+      contact: "اتصل بنا",
+    },
+    philosophy: {
+      heading: "فلسفتنا",
+      desc: "نؤمن أن العافية الحقيقية تأتي من معالجة الشخص بالكامل – الجسد والعقل والروح – من خلال رعاية شخصية قائمة على الأدلة. فلسفتنا متجذرة في الوقاية، والتمكين، والممارسات العلاجية الشاملة التي تحترم فرديتك.",
+      timeline: [
+        {
+          icon: <FaHeartbeat className="text-4xl text-purple-400" />,
+          title: "رعاية شاملة",
+          desc: "نتجاوز الأعراض لمعالجة الأسباب الجذرية وخلق صحة مستدامة.",
+        },
+        {
+          icon: <GiFruitBowl className="text-4xl text-purple-500" />,
+          title: "الوقاية أولاً",
+          desc: "تركيزنا على بناء الصحة بدلاً من مجرد مكافحة المرض.",
+        },
+        {
+          icon: <GiRunningShoe className="text-4xl text-purple-600" />,
+          title: "التمكين",
+          desc: "نمنحك المعرفة والأدوات للعافية مدى الحياة.",
+        },
+      ],
+    },
+    visionMission: {
+      heading: "رؤيتنا ورسالتنا",
+      vision: {
+        badge: "٠١",
+        heading: "رؤيتنا",
+        desc: "إعادة تعريف العافية من خلال خلق عالم تتوفر فيه التوازن والسلام والحيوية للجميع. نتصور مجتمعات تحتضن اليقظة والتغذية والرعاية الذاتية كممارسات يومية.",
+      },
+      mission: {
+        badge: "٠٢",
+        heading: "رسالتنا",
+        desc: "تقديم برامج صحية تحويلية ورعاية شخصية تلهم الناس لعيش حياة أكثر صحة وسعادة وإشباعًا. مهمتنا هي جعل العافية بسيطة ومستدامة ومبهجة.",
+      },
+      sub: "تمكين العافية الشاملة من خلال الابتكار والرعاية والعيش الواعي.",
+    },
+    numbers: {
+      heading: "بالأرقام",
+      desc: "تأثيرنا في مجتمع العافية يتحدث عن نفسه",
+      stats: [
+        { value: "10K+", label: "عملاء سعداء", icon: <FaUsers className="text-3xl" /> },
+        { value: "15+", label: "سنوات الخبرة", icon: <FaAward className="text-3xl" /> },
+        { value: "50+", label: "ممارسون خبراء", icon: <FaHandsHelping className="text-3xl" /> },
+        { value: "100%", label: "طرق طبيعية", icon: <FaLeaf className="text-3xl" /> }
+      ],
+    },
+    team: {
+      heading: "تعرف على الفريق",
+      desc: "يضم فريقنا المتنوع خبراء يجمعون عقودًا من الخبرة في العديد من تخصصات العلاج.",
+      members: [
+        {
+          name: "د. ديباك شوبرا",
+          role: "طبيب تكاملي",
+          img: image3,
+          hoverText: "متخصص في الطب الوظيفي والعلاج بالتغذية",
+        },
+        {
+          name: "د. أندرو ويل",
+          role: "رئيس العلاج الطبيعي",
+          img: image2,
+          hoverText: "خبير في علاج الحركة وإدارة الألم",
+        },
+        {
+          name: "د. مارك هايمان",
+          role: "مدير اليقظة الذهنية",
+          img: image,
+          hoverText: "طور برامجنا الشهيرة لتقليل التوتر",
+        },
+      ],
+    },
+    testimonials: {
+      heading: "أصوات التحول",
+      desc: "قصص حقيقية. نمو حقيقي. استمع كيف تغيرت الحياة من خلال نهجنا الشامل للعافية والتوازن.",
+      items: [
+        {
+          img: image4,
+          name: "سارة جونسون",
+          role: "ممارسة اليوغا",
+          quote: "غيرت Vitality Wellness نهجي للصحة. ساعدتني طرقهم الشاملة على إيجاد التوازن في الجسد والعقل.",
+        },
+        {
+          img: image5,
+          name: "مايكل تشين",
+          role: "محب اللياقة",
+          quote: "كانت خطة التغذية الشخصية نقطة تحول في مستويات الطاقة والأداء العام.",
+        },
+        {
+          img: image6,
+          name: "د. إميلي رودريغيز",
+          role: "طبيبة",
+          quote: "كطبيبة، أقدر نهجهم القائم على الأدلة والرحيم في العافية.",
+        }
+      ],
+    },
+    join: {
+      heading: "ابدأ رحلتك الصحية",
+      sub: "اكتشف إمكانياتك واحتضن نمط حياة أكثر صحة. نحن هنا لنرشدك نحو التوازن والطاقة والتحول.",
+      book: "احجز استشارة",
+      explore: "استكشف البرامج",
+    },
+    themeToggle: {
+      dark: "الوضع الداكن",
+      light: "الوضع الفاتح",
+    },
   },
   he: {
-    heroTitle: 'מסע הרווחה שלנו',
-    heroSubtitle: 'המקום שבו המדע פוגש חמלה ליצירת חוויות בריאות משנות חיים',
-    heroServices: 'השירותים שלנו',
-    heroContact: 'צור קשר',
-    storyHeading: 'הסיפור שלנו',
-    storyParagraph: 'Vitality Wellness הוקמה ב-2008 כמרפאה קטנה עם חזון גדול: להגדיר מחדש בריאות הוליסטית באמצעות שילוב חכמה עתיקה עם מדע מודרני. מה שהתחיל כפרויקט תשוקה בין שלושה מטפלים הפך למרכז רווחה משגשג המשרת אלפים מדי שנה, מבלי לאבד את המגע האישי. במהלך השנים הרחבנו את הצוות, בנינו תוכניות ייחודיות ויצרנו סביבה תומכת שבה כל אדם מרגיש מוערך. מתוכניות רווחה מותאמות ועד סדנאות קהילתיות, המסע שלנו תמיד עסק בהשראת שינוי. כיום אנו מרכז אמין למי שמחפש איזון, ריפוי והעצמה — והוכחה שרווחה אמיתית אינה יעד אלא מסע חיים.',
-    storyCta1: 'צפה בשירותים שלנו',
-    storyCta2: 'צור קשר',
-    philosophyHeading: 'הפילוסופיה שלנו',
-    philosophyParagraph: 'אנו מאמינים שרווחה אמיתית נובעת מטיפול באדם בשלמותו – גוף, נפש ורוח – באמצעות טיפול מותאם אישית המבוסס ראיות. הפילוסופיה שלנו מושתתת על מניעה, העצמה ושיטות ריפוי הוליסטיות המכבדות את הייחודיות שלך.',
-    philosophyCard1Title: 'טיפול באדם השלם',
-    philosophyCard1Desc: 'אנו מביטים מעבר לתסמינים כדי לטפל בשורשים וליצור בריאות בת-קיימא.',
-    philosophyCard2Title: 'מניעה תחילה',
-    philosophyCard2Desc: 'המיקוד שלנו הוא בבניית בריאות ולא רק במלחמה במחלה.',
-    philosophyCard3Title: 'העצמה',
-    philosophyCard3Desc: 'אנו מציידים אותך בידע וכלים לרווחה מתמשכת.',
-    numbersHeading: 'במספרים',
-    numbersSubtitle: 'ההשפעה שלנו בקהילת הרווחה מדברת בעד עצמה',
-    stat1: 'לקוחות מרוצים',
-    stat2: 'שנות ניסיון',
-    stat3: 'מטפלים מומחים',
-    stat4: 'שיטות טבעיות',
-    teamHeading: 'הכירו את הצוות',
-    teamSubtitle: 'צוות המומחים המגוון שלנו מביא יחד עשרות שנות ניסיון בתחומים טיפוליים שונים.',
-    team1Name: 'ד"ר דיפאק צ׳ופרה',
-    team1Role: 'רופא אינטגרטיבי',
-    team1Hover: 'מומחה לרפואה פונקציונלית וריפוי מבוסס תזונה',
-    team2Name: 'ד"ר אנדרו ווייל',
-    team2Role: 'ראש הפיזיותרפיה',
-    team2Hover: 'מומחה לטיפול בתנועה וניהול כאב',
-    team3Name: 'ד"ר מארק היימן',
-    team3Role: 'מנהל המיינדפולנס',
-    team3Hover: 'פיתח את תוכניות הפחתת הסטרס המובילות שלנו',
-    testimonialsHeading: 'במילותיהם',
-    testimonialsSubtitle: 'הקשיבו למי שחוו את ההבדל של Vitality. לקוחותינו משתפים במסעות שינוי, בריאות משופרת וסיפורי רווחה הוליסטית המשקפים את מחויבותנו להרמוניית גוף-נפש.',
-    testimonial1Name: 'שרה ג\'ונסון',
-    testimonial1Role: 'מתרגלת יוגה',
-    testimonial1Quote: 'Vitality Wellness שינתה את הגישה שלי לבריאות. השיטות ההוליסטיות שלהם עזרו לי למצוא איזון בין הגוף לנפש.',
-    testimonial2Name: 'מייקל צ\'ן',
-    testimonial2Role: 'חובב כושר',
-    testimonial2Quote: 'תוכנית התזונה המותאמת אישית חוללה שינוי ברמות האנרגיה והביצועים שלי.',
-    testimonial3Name: 'ד"ר אמילי רודריגז',
-    testimonial3Role: 'רופאה',
-    testimonial3Quote: 'כמומחית רפואה, אני מעריכה את הגישה מבוססת הראיות והאנושית שלהם לרווחה.',
-    ctaHeading: 'התחילו את מסע הרווחה שלכם',
-    ctaParagraph: 'מוכנים לחוות את ההבדל של Vitality? אנחנו כאן כדי להדריך אתכם בכל צעד.',
-    ctaBtn1: 'קבעו ייעוץ',
-    ctaBtn2: 'גלו תוכניות'
-  }
+    hero: {
+      heading: "אודות Vitality Wellness",
+      sub: "המקום בו המדע פוגש חמלה ליצירת חוויות בריאות משנות חיים",
+      services: "השירותים שלנו",
+      contact: "צור קשר",
+    },
+    story: {
+      heading: "הסיפור שלנו",
+      title: "רווחה מעבר ליופי",
+      desc: "מאז 2008 אנו נלהבים להוביל אנשים לחיים בריאים ומאוזנים יותר. מה שהתחיל כמקלט קטן לרווחה הפך למקום אמין להרפיה, ריפוי וטיפוח עצמי. אנו מאמינים שרווחה אמיתית עמוקה יותר מהמראה החיצוני — זו ההרמוניה של גוף, נפש ורוח. הטיפולים ההוליסטיים והטבעיים שלנו נועדו לעזור לך להיטען מחדש, למצוא איזון ולאמץ חיים מודעים בכל יום.",
+      explore: "גלה שירותים →",
+      contact: "צור קשר",
+    },
+    philosophy: {
+      heading: "הפילוסופיה שלנו",
+      desc: "אנו מאמינים שרווחה אמיתית מגיעה מטיפול באדם השלם – גוף, נפש ורוח – עם טיפול אישי מבוסס ראיות. הפילוסופיה שלנו מושרשת במניעה, העצמה ושיטות ריפוי הוליסטיות שמכבדות את הייחודיות שלך.",
+      timeline: [
+        {
+          icon: <FaHeartbeat className="text-4xl text-purple-400" />,
+          title: "טיפול הוליסטי",
+          desc: "אנו מסתכלים מעבר לתסמינים כדי לטפל בשורש הבעיה וליצור בריאות בת קיימא.",
+        },
+        {
+          icon: <GiFruitBowl className="text-4xl text-purple-500" />,
+          title: "מניעה תחילה",
+          desc: "ההתמקדות שלנו היא בבניית בריאות ולא רק במלחמה במחלה.",
+        },
+        {
+          icon: <GiRunningShoe className="text-4xl text-purple-600" />,
+          title: "העצמה",
+          desc: "אנו מעניקים לך ידע וכלים לרווחה לכל החיים.",
+        },
+      ],
+    },
+    visionMission: {
+      heading: "החזון והמשימה שלנו",
+      vision: {
+        badge: "01",
+        heading: "החזון שלנו",
+        desc: "להגדיר מחדש את הרווחה על ידי יצירת עולם בו איזון, שלום וחיוניות נגישים לכולם. אנו רואים קהילות שמאמצות מיינדפולנס, תזונה וטיפוח עצמי כהרגלים יומיומיים.",
+      },
+      mission: {
+        badge: "02",
+        heading: "המשימה שלנו",
+        desc: "להעניק תוכניות בריאות משנות חיים וטיפול אישי שמעורר אנשים לחיות חיים בריאים, שמחים ומספקים יותר. המשימה שלנו היא להפוך את הרווחה לפשוטה, בת קיימא ומשמחת.",
+      },
+      sub: "להעצים רווחה הוליסטית באמצעות חדשנות, טיפול וחיים מודעים.",
+    },
+    numbers: {
+      heading: "במספרים",
+      desc: "ההשפעה שלנו בקהילת הבריאות מדברת בעד עצמה",
+      stats: [
+        { value: "10K+", label: "לקוחות מרוצים", icon: <FaUsers className="text-3xl" /> },
+        { value: "15+", label: "שנות ניסיון", icon: <FaAward className="text-3xl" /> },
+        { value: "50+", label: "מטפלים מומחים", icon: <FaHandsHelping className="text-3xl" /> },
+        { value: "100%", label: "שיטות טבעיות", icon: <FaLeaf className="text-3xl" /> }
+      ],
+    },
+    team: {
+      heading: "הכירו את הצוות",
+      desc: "הצוות המגוון שלנו מביא עשרות שנות ניסיון במגוון תחומי ריפוי.",
+      members: [
+        {
+          name: "ד\"ר דיפאק צ'ופרה",
+          role: "רופא אינטגרטיבי",
+          img: image3,
+          hoverText: "מתמחה ברפואה פונקציונלית וריפוי תזונתי",
+        },
+        {
+          name: "ד\"ר אנדרו ווייל",
+          role: "ראש הפיזיותרפיה",
+          img: image2,
+          hoverText: "מומחה לטיפול בתנועה וניהול כאב",
+        },
+        {
+          name: "ד\"ר מארק היימן",
+          role: "מנהל מיינדפולנס",
+          img: image,
+          hoverText: "פיתח את תוכניות הפחתת הלחץ המובילות שלנו",
+        },
+      ],
+    },
+    testimonials: {
+      heading: "קולות של שינוי",
+      desc: "סיפורים אמיתיים. צמיחה אמיתית. שמעו כיצד חיים השתנו בזכות הגישה ההוליסטית שלנו לרווחה ואיזון.",
+      items: [
+        {
+          img: image4,
+          name: "שרה ג'ונסון",
+          role: "מתרגלת יוגה",
+          quote: "Vitality Wellness שינתה את הגישה שלי לבריאות. השיטות ההוליסטיות שלהם עזרו לי למצוא איזון בגוף ובנפש.",
+        },
+        {
+          img: image5,
+          name: "מייקל צ'ן",
+          role: "חובב כושר",
+          quote: "תוכנית התזונה האישית שינתה את רמות האנרגיה והביצועים שלי.",
+        },
+        {
+          img: image6,
+          name: "ד\"ר אמילי רודריגז",
+          role: "רופאה",
+          quote: "כרופאה, אני מעריכה את הגישה המבוססת ראיות והחומלת שלהם לרווחה.",
+        }
+      ],
+    },
+    join: {
+      heading: "התחל את מסע הבריאות שלך",
+      sub: "גלה את הפוטנציאל שלך ואמץ אורח חיים בריא יותר. אנחנו כאן כדי להדריך אותך לאיזון, אנרגיה ושינוי.",
+      book: "קבע פגישה",
+      explore: "גלה תוכניות",
+    },
+    themeToggle: {
+      dark: "מצב כהה",
+      light: "מצב בהיר",
+    },
+  },
 };
 
-const getLanguage = () => {
-  if (typeof window === 'undefined') return 'en';
-  return localStorage.getItem('language') || 'en';
-};
+const THEME_KEY = 'theme';
+const LANGUAGE_KEY = 'language';
 
 const AboutUs = () => {
-  const [language, setLanguage] = useState(getLanguage());
-  // Theme state and effect (robust, cross-tab sync, SSR-safe)
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem(THEME_KEY) || 'light';
     }
     return 'light';
+  });
+
+  const [language, setLanguage] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(LANGUAGE_KEY) || 'en';
+    }
+    return 'en';
   });
 
   useEffect(() => {
@@ -211,26 +418,25 @@ const AboutUs = () => {
     }
   }, []);
 
-  // Sync language changes
   useEffect(() => {
-    const handleLanguageChange = () => {
-      setLanguage(getLanguage());
+    const handleLangChange = () => {
+      const newLang = localStorage.getItem(LANGUAGE_KEY) || "en";
+      setLanguage(newLang);
     };
-    window.addEventListener('language-changed', handleLanguageChange);
-    window.addEventListener('storage', handleLanguageChange);
+    window.addEventListener("language-changed", handleLangChange);
+    window.addEventListener("storage", handleLangChange);
     return () => {
-      window.removeEventListener('language-changed', handleLanguageChange);
-      window.removeEventListener('storage', handleLanguageChange);
+      window.removeEventListener("language-changed", handleLangChange);
+      window.removeEventListener("storage", handleLangChange);
     };
   }, []);
 
-  const t = (key) => TRANSLATIONS[language]?.[key] || TRANSLATIONS.en[key] || key;
+  const isRTL = language === "ar" || language === "he";
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
-  // Helper for theme-based class
   const themedClass = (base, dark, light) =>
     `${base} ${theme === 'dark' ? dark : light}`;
 
@@ -257,41 +463,10 @@ const AboutUs = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+      setActiveTestimonial((prev) => (prev + 1) % translations[language].testimonials.items.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
-
-  const testimonials = [
-    {
-      img: image4,
-      nameKey: 'testimonial1Name',
-      roleKey: 'testimonial1Role',
-      quoteKey: 'testimonial1Quote',
-      extraText: ''
-    },
-    {
-      img: image5,
-      nameKey: 'testimonial2Name',
-      roleKey: 'testimonial2Role',
-      quoteKey: 'testimonial2Quote',
-      extraText: ''
-    },
-    {
-      img: image6,
-      nameKey: 'testimonial3Name',
-      roleKey: 'testimonial3Role',
-      quoteKey: 'testimonial3Quote',
-      extraText: ''
-    }
-  ];
-
-  const stats = [
-    { value: "10K+", label: "Happy Clients", icon: <FaUsers className="text-3xl" /> },
-    { value: "15+", label: "Years Experience", icon: <FaAward className="text-3xl" /> },
-    { value: "50+", label: "Expert Practitioners", icon: <FaHandsHelping className="text-3xl" /> },
-    { value: "100%", label: "Natural Methods", icon: <FaLeaf className="text-3xl" /> }
-  ];
+  }, [language]);
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -299,145 +474,206 @@ const AboutUs = () => {
   };
 
   return (
-    <div className={themedClass(
-      "font-sans min-h-screen transition-colors duration-500",
-      "bg-gray-900 text-gray-100",
-      "bg-white text-gray-800"
-    )}>
-      
+    <div
+      className={themedClass(
+        "font-sans min-h-screen transition-colors duration-500",
+        "bg-gray-900 text-gray-100",
+        "bg-white text-gray-800"
+      )}
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      {/* Theme Toggle Button */}
+      <div className="fixed top-6 right-6 z-50">
+        <button
+          onClick={toggleTheme}
+          className="px-4 py-2 rounded-lg bg-purple-600 text-white shadow hover:bg-purple-700 transition"
+        >
+          {theme === "light"
+            ? translations[language].themeToggle.dark
+            : translations[language].themeToggle.light}
+        </button>
+      </div>
 
       {/* Hero Section */}
-      <section className="relative w-full h-screen overflow-hidden">
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
+// ...existing code...
+
+{/* Hero Section */}
+<section className="relative w-full h-screen overflow-hidden" dir={isRTL ? "rtl" : "ltr"}>
+  <video
+    className="absolute inset-0 w-full h-full object-cover"
+    autoPlay
+    loop
+    muted
+    playsInline
+  >
+    <source src={vedio} type="video/mp4" />
+  </video>
+  <div className="absolute inset-0 bg-black/70"></div>
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, ease: "easeOut" }}
+    viewport={{ once: true }}
+    className="relative flex flex-col justify-center items-center h-full text-center text-white px-6 z-10"
+  >
+    <motion.h1
+      key={language} // ensures re-render on language change
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, delay: 0.3, type: "spring" }}
+      className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight"
+    >
+      <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
+        {translations[language].hero.heading}
+      </span>
+    </motion.h1>
+    <motion.p
+      key={language + "-sub"}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1, delay: 0.6 }}
+      className="text-lg md:text-xl mb-10 max-w-2xl text-purple-100"
+    >
+      {translations[language].hero.sub}
+    </motion.p>
+    <div className="flex flex-wrap gap-5 justify-center">
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <Link
+          to="/services"
+          className={themedClass(
+            "px-8 py-3 rounded-full font-semibold text-lg shadow-xl transition-all relative overflow-hidden",
+            "bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white hover:opacity-90 hover:shadow-purple-500/50",
+            "bg-white text-purple-700 hover:bg-purple-100"
+          )}
         >
-          <source src={vedio} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="relative flex flex-col justify-center items-center h-full text-center text-white px-4"
+          <span className="relative z-10">{translations[language].hero.services}</span>
+          <motion.span
+            className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-500 opacity-40 blur-xl"
+            animate={{ opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </Link>
+      </motion.div>
+      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <Link
+          to="/contact"
+          className={themedClass(
+            "px-8 py-3 rounded-full font-semibold text-lg shadow-xl transition-all relative",
+            "bg-purple-600 text-white hover:bg-purple-700",
+            "bg-purple-600 text-white hover:bg-purple-700"
+          )}
         >
-          <motion.h1
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="text-5xl md:text-6xl font-serif font-bold mb-6"
-          >
-            {t('heroTitle')}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="text-xl mb-8 max-w-2xl"
-          >
-            {t('heroSubtitle')}
-          </motion.p>
-          <div className="flex flex-wrap gap-4">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                to="/services"
-                className={themedClass(
-                  "font-bold py-3 px-6 rounded-full shadow transition-all inline-block",
-                  "bg-[#00bfff] text-white hover:bg-green-700",
-                  "bg-green-600 text-white hover:bg-green-700"
-                )}
-              >
-                {t('heroServices')}
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link
-                to="/contact"
-                className={themedClass(
-                  "border-2 font-bold py-3 px-6 rounded-full shadow transition-all inline-block",
-                  "border-[#00bfff] text-[#00bfff] hover:bg-[#00bfff] hover:text-white",
-                  "border-green-600 text-green-600 hover:bg-green-50"
-                )}
-              >
-                {t('heroContact')}
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
+          {translations[language].hero.contact}
+        </Link>
+      </motion.div>
+    </div>
+  </motion.div>
+  <motion.div
+    className="absolute top-24 left-12 w-32 h-32 bg-purple-500/30 rounded-full blur-3xl"
+    animate={{ y: [0, -20, 0], opacity: [0.5, 0.9, 0.5] }}
+    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+  />
+  <motion.div
+    className="absolute bottom-24 right-16 w-40 h-40 bg-pink-400/25 rounded-full blur-3xl"
+    animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
+    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+  />
+</section>
+
+
+
+
+
 
       {/* Section 1: Our Story */}
-      <section className={themedClass(
-        "w-full py-20 px-6",
-        "bg-[#1E2A38]",
-        "bg-white"
-      )}>
-        <div className="w-full">
+      <section
+        className={themedClass(
+          "w-full py-28 px-6 relative overflow-hidden",
+          "bg-[#1E2A38]",
+          "bg-white"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="w-full max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={isVisible[0] ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
+              initial={{ opacity: 0, x: isRTL ? 100 : -100 }}
+              animate={isVisible[0] ? { opacity: 1, x: 0 } : { opacity: 0, x: isRTL ? 100 : -100 }}
               transition={{ duration: 1 }}
-              className="lg:w-1/2"
+              className="lg:w-1/2 text-center lg:text-left"
+              dir={isRTL ? "rtl" : "ltr"}
             >
-              <div className="relative group">
-                <img
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b"
-                  alt="Our team"
-                  className="rounded-lg shadow-xl w-full h-auto group-hover:shadow-2xl transition-all duration-500"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-green-500 p-4 rounded-lg shadow-lg group-hover:rotate-6 transition-transform duration-500">
-                  <GiMeditation className="text-5xl text-white" />
-                </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={isVisible[0] ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }}
-              transition={{ duration: 1 }}
-              className="lg:w-1/2"
-            >
-              <h2 className={themedClass(
-                "text-3xl md:text-4xl font-serif font-bold mb-6",
-                "text-green-300",
-                "text-green-600"
-              )}>
-                {t('storyHeading')}
-              </h2>
-              <p className={themedClass(
-                "text-lg mb-8 text-justify leading-relaxed",
-                "text-gray-300",
-                "text-gray-800"
-              )}>
-                {t('storyParagraph')}
+              <p
+                className={themedClass(
+                  "uppercase tracking-widest text-sm font-semibold mb-4",
+                  "text-purple-400",
+                  "text-purple-600"
+                )}
+              >
+                {translations[language].story.heading}
               </p>
-              <div className="flex flex-wrap gap-4">
+              <h2
+                className={themedClass(
+                  "text-4xl md:text-5xl font-serif font-bold mb-5 leading-snug",
+                  "text-white",
+                  "text-gray-900"
+                )}
+              >
+                {translations[language].story.title}
+              </h2>
+              <p
+                className={themedClass(
+                  "text-lg mb-8 max-w-lg leading-relaxed",
+                  "text-gray-300",
+                  "text-gray-600"
+                )}
+              >
+                {translations[language].story.desc}
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     to="/services"
                     className={themedClass(
-                      "font-bold py-3 px-6 rounded-full shadow transition-all inline-block",
-                      "bg-[#00bfff] text-white hover:bg-green-700",
-                      "bg-green-600 text-white hover:bg-green-700"
+                      "font-semibold py-3 px-8 rounded-full shadow-lg transition-all",
+                      "bg-purple-600 text-white hover:bg-purple-700",
+                      "bg-purple-600 text-white hover:bg-purple-700"
                     )}
                   >
-                    {t('storyCta1')}
+                    {translations[language].story.explore}
                   </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     to="/contact"
                     className={themedClass(
-                      "border-2 font-bold py-3 px-6 rounded-full transition-all inline-block",
-                      "border-[#00bfff] text-[#00bfff] hover:bg-[#00bfff] hover:text-white",
-                      "border-green-600 text-green-600 hover:bg-green-50"
+                      "border-2 font-semibold py-3 px-8 rounded-full transition-all",
+                      "border-purple-400 text-purple-400 hover:bg-purple-500 hover:text-white",
+                      "border-purple-600 text-purple-600 hover:bg-purple-50"
                     )}
                   >
-                    {t('storyCta2')}
+                    {translations[language].story.contact}
                   </Link>
                 </motion.div>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: isRTL ? -100 : 100 }}
+              animate={isVisible[0] ? { opacity: 1, x: 0 } : { opacity: 0, x: isRTL ? -100 : 100 }}
+              transition={{ duration: 1 }}
+              className="lg:w-1/2 flex justify-center relative"
+            >
+              <div className="relative">
+                <img
+                  src={image7}
+                  alt="Wellness Therapy"
+                  className="rounded-[40%] w-[400px] h-[350px] object-cover shadow-2xl border-4 border-purple-100"
+                />
+                <img
+                  src={image8}
+                  alt="Healthy Lifestyle"
+                  className="absolute -bottom-8 -right-8 w-40 h-40 object-cover rounded-full shadow-lg border-4 border-purple-50"
+                />
               </div>
             </motion.div>
           </div>
@@ -445,194 +681,334 @@ const AboutUs = () => {
       </section>
 
       {/* Section 2: Our Philosophy */}
-      <section className={themedClass(
-        "w-full py-20 px-6",
-        "bg-[#22304a]",
-        "bg-green-50"
-      )}>
-        <div className="w-full text-center">
-          <motion.div
-            initial="hidden"
-            animate={isVisible[1] ? "visible" : "hidden"}
-            variants={fadeIn}
+      <section
+        className={themedClass(
+          "relative w-full py-20 px-6 overflow-hidden",
+          "bg-gradient-to-r from-[#1a1733] via-[#2b1b47] to-[#1a1733]",
+          "bg-gradient-to-r from-purple-50 via-white to-purple-100"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-400 opacity-20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 opacity-20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <motion.div
+          initial="hidden"
+          animate={isVisible[1] ? "visible" : "hidden"}
+          variants={fadeIn}
+          className="relative z-10 max-w-5xl mx-auto text-center"
+        >
+          <h2
+            className={themedClass(
+              "text-4xl md:text-5xl font-serif font-bold mb-10",
+              "text-purple-300",
+              "text-purple-700"
+            )}
           >
-            <h2 className={themedClass(
-              "text-3xl md:text-4xl font-serif font-bold mb-6",
-              "text-green-300",
-              "text-green-600"
-            )}>
-              {t('philosophyHeading')}
-            </h2>
-            <p className={themedClass(
-              "max-w-4xl mx-auto text-lg mb-16 text-justify leading-relaxed",
+            {translations[language].philosophy.heading}
+          </h2>
+          <p
+            className={themedClass(
+              "max-w-3xl mx-auto text-lg mb-16 leading-relaxed",
               "text-gray-300",
               "text-gray-800"
-            )}>
-              {t('philosophyParagraph')}
-            </p>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  icon: <FaHeartbeat className="text-5xl mb-4 text-green-500" />,
-                  title: t('philosophyCard1Title'),
-                  desc: t('philosophyCard1Desc'),
-                  animation: { hidden: { opacity: 0, x: -100 }, visible: { opacity: 1, x: 0 } },
-                },
-                {
-                  icon: <GiFruitBowl className="text-5xl mb-4 text-green-400" />,
-                  title: t('philosophyCard2Title'),
-                  desc: t('philosophyCard2Desc'),
-                  animation: { hidden: { opacity: 0, y: 50 }, visible: { opacity: 1, y: 0 } },
-                },
-                {
-                  icon: <GiRunningShoe className="text-5xl mb-4 text-green-600" />,
-                  title: t('philosophyCard3Title'),
-                  desc: t('philosophyCard3Desc'),
-                  animation: { hidden: { opacity: 0, x: 100 }, visible: { opacity: 1, x: 0 } },
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={item.animation}
-                  initial="hidden"
-                  animate={isVisible[1] ? "visible" : "hidden"}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  whileHover={{ y: -10 }}
-                  className={themedClass(
-                    "p-8 rounded-xl shadow-md hover:shadow-xl transition-all",
-                    "bg-[#1E2A38]",
-                    "bg-white"
-                  )}
-                >
-                  <div className="flex justify-center">{item.icon}</div>
-                  <h3 className={themedClass(
-                    "text-xl font-bold mb-3",
-                    "text-green-200",
-                    "text-green-600"
-                  )}>{item.title}</h3>
-                  <p className={themedClass(
-                    "text-justify",
-                    "text-gray-300",
-                    "text-gray-800"
-                  )}>{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Section 3: By The Numbers */}
-      <section className={themedClass(
-        "w-full py-20 px-4",
-        "bg-[#1E2A38] text-green-200",
-        "bg-green-100 text-green-900"
-      )}>
-        <div className="w-full">
-          <motion.div
-            initial="hidden"
-            animate={isVisible[2] ? "visible" : "hidden"}
-            variants={fadeIn}
-            className="text-center mb-16"
+            )}
           >
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-              {t('numbersHeading')}
-            </h2>
-            <p className="max-w-3xl mx-auto text-lg opacity-90">
-              {t('numbersSubtitle')}
-            </p>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
+            {translations[language].philosophy.desc}
+          </p>
+          <div className="relative border-l-4 border-purple-500 ml-6">
+            {translations[language].philosophy.timeline.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isVisible[2] ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: index * 0.1 + 0.3 }}
-                className={themedClass(
-                  "text-center p-8 rounded-xl backdrop-blur-sm hover:bg-opacity-90 transition-all shadow-md",
-                  "bg-[#22304a] bg-opacity-70",
-                  "bg-white bg-opacity-70"
-                )}
+                initial={{ opacity: 0, x: index % 2 === 0 ? (isRTL ? 100 : -100) : (isRTL ? -100 : 100) }}
+                animate={isVisible[1] ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: index * 0.3 }}
+                className="mb-12 ml-6 relative"
               >
-                <div className={themedClass(
-                  "flex justify-center mb-4",
-                  "text-green-300",
-                  "text-green-600"
-                )}>
-                  {stat.icon}
-                </div>
-                <div className="text-4xl font-bold mb-2">{stat.value}</div>
-                <div className="text-lg opacity-90">{t(stat.label.includes('Happy') ? 'stat1' : stat.label.includes('Years Experience') ? 'stat2' : stat.label.includes('Expert') ? 'stat3' : 'stat4')}</div>
+                <span className="absolute -left-11 flex items-center justify-center w-12 h-12 rounded-full bg-purple-500 text-white shadow-lg animate-bounce">
+                  {item.icon}
+                </span>
+                <h3
+                  className={themedClass(
+                    "text-2xl font-bold mb-2",
+                    "text-purple-200",
+                    "text-purple-700"
+                  )}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className={themedClass(
+                    "text-base leading-relaxed",
+                    "text-gray-300",
+                    "text-gray-800"
+                  )}
+                >
+                  {item.desc}
+                </p>
               </motion.div>
             ))}
           </div>
+        </motion.div>
+      </section>
+
+      {/* Vision & Mission */}
+      <section
+        className={themedClass(
+          "relative w-full py-24 px-6 overflow-hidden",
+          "bg-gradient-to-br from-[#1a103f] via-[#2b165b] to-[#1a103f]",
+          "bg-gradient-to-br from-purple-50 via-white to-purple-100"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400 opacity-20 rounded-full blur-3xl animate-pulse -z-10"></div>
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600 opacity-20 rounded-full blur-3xl animate-ping -z-10"></div>
+        <div className="max-w-6xl mx-auto text-center mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: -40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className={themedClass(
+              "text-5xl md:text-6xl font-extrabold mb-6 tracking-wide",
+              "text-purple-300",
+              "text-purple-800"
+            )}
+          >
+            {translations[language].visionMission.heading}
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className={themedClass(
+              "text-lg max-w-2xl mx-auto",
+              "text-gray-300",
+              "text-gray-700"
+            )}
+          >
+            {translations[language].visionMission.sub}
+          </motion.p>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, x: isRTL ? 100 : -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative flex flex-col md:flex-row items-center md:items-start gap-10 max-w-6xl mx-auto mb-24"
+        >
+          <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-purple-500 to-purple-700 text-white font-bold text-3xl shadow-lg animate-bounce">
+            {translations[language].visionMission.vision.badge}
+          </div>
+          <div
+            className={themedClass(
+              "flex-1 backdrop-blur-lg rounded-2xl p-8 shadow-xl border",
+              "border-purple-400/40 bg-white/10",
+              "border-purple-200 bg-white"
+            )}
+          >
+            <h3
+              className={themedClass(
+                "text-3xl font-semibold mb-4",
+                "text-purple-200",
+                "text-purple-700"
+              )}
+            >
+              {translations[language].visionMission.vision.heading}
+            </h3>
+            <p
+              className={themedClass(
+                "text-lg leading-relaxed",
+                "text-gray-200",
+                "text-gray-700"
+              )}
+            >
+              {translations[language].visionMission.vision.desc}
+            </p>
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, x: isRTL ? -100 : 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="relative flex flex-col md:flex-row-reverse items-center md:items-start gap-10 max-w-6xl mx-auto"
+        >
+          <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-purple-600 to-purple-800 text-white font-bold text-3xl shadow-lg animate-pulse">
+            {translations[language].visionMission.mission.badge}
+          </div>
+          <div
+            className={themedClass(
+              "flex-1 backdrop-blur-lg rounded-2xl p-8 shadow-xl border",
+              "border-purple-400/40 bg-white/10",
+              "border-purple-200 bg-white"
+            )}
+          >
+            <h3
+              className={themedClass(
+                "text-3xl font-semibold mb-4",
+                "text-purple-200",
+                "text-purple-700"
+              )}
+            >
+              {translations[language].visionMission.mission.heading}
+            </h3>
+            <p
+              className={themedClass(
+                "text-lg leading-relaxed",
+                "text-gray-200",
+                "text-gray-700"
+              )}
+            >
+              {translations[language].visionMission.mission.desc}
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Section 3: By The Numbers */}
+      <section
+        className={themedClass(
+          "relative w-full py-24 px-6 overflow-hidden",
+          "bg-gradient-to-br from-[#1a103f] via-[#2b165b] to-[#1a103f] text-purple-200",
+          "bg-gradient-to-br from-purple-50 via-white to-purple-100 text-purple-900"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="absolute top-10 left-10 w-64 h-64 bg-purple-400 opacity-20 rounded-full blur-3xl animate-pulse -z-10"></div>
+        <div className="absolute bottom-10 right-10 w-72 h-72 bg-purple-600 opacity-20 rounded-full blur-3xl animate-ping -z-10"></div>
+        <motion.div
+          initial="hidden"
+          animate={isVisible[2] ? "visible" : "hidden"}
+          variants={fadeIn}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+            {translations[language].numbers.heading}
+          </h2>
+          <p className="max-w-3xl mx-auto text-lg opacity-90">
+            {translations[language].numbers.desc}
+          </p>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 max-w-6xl mx-auto">
+          {translations[language].numbers.stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isVisible[2] ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: index * 0.15 + 0.3, duration: 0.6 }}
+              whileHover={{ scale: 1.08 }}
+              className="relative group"
+            >
+              <div
+                className={themedClass(
+                  "relative flex flex-col items-center justify-center w-48 h-48 mx-auto rounded-full shadow-xl backdrop-blur-md border overflow-hidden transition-all duration-500 group-hover:shadow-purple-500/50 group-hover:scale-105",
+                  "bg-white/10 border-purple-400/30",
+                  "bg-white border-purple-200"
+                )}
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/40 via-transparent to-purple-800/40 opacity-30 group-hover:opacity-60 transition-all"></div>
+                <div
+                  className={themedClass(
+                    "mb-3 text-4xl relative z-10",
+                    "text-purple-300",
+                    "text-purple-600"
+                  )}
+                >
+                  {stat.icon}
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold relative z-10">
+                  {stat.value}
+                </div>
+                <div className="text-base mt-2 opacity-90 relative z-10">
+                  {stat.label}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* Section 4: Meet The Team */}
-      <section className={themedClass(
-        "py-20 px-4 w-full",
-        "bg-[#22304a]",
-        "bg-white"
-      )}>
+      <section
+        className={themedClass(
+          "relative py-24 px-6 w-full overflow-hidden",
+          "bg-gradient-to-br from-[#1a103f] via-[#24124a] to-[#1a103f]",
+          "bg-gradient-to-br from-purple-50 via-white to-purple-100"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400 opacity-20 rounded-full blur-3xl animate-pulse -z-10"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-600 opacity-20 rounded-full blur-3xl animate-ping -z-10"></div>
         <motion.div
           initial="hidden"
           animate={isVisible[3] ? "visible" : "hidden"}
           variants={fadeIn}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className={themedClass(
-            "text-3xl md:text-4xl font-serif font-bold mb-6",
-            "text-green-200",
-            "text-green-600"
-          )}>{t('teamHeading')}</h2>
-          <p className={themedClass(
-            "max-w-4xl mx-auto text-lg",
-            "text-gray-300",
-            "text-gray-800"
-          )}>
-            {t('teamSubtitle')}
+          <h2
+            className={themedClass(
+              "text-4xl md:text-5xl font-extrabold mb-6 tracking-wide",
+              "text-purple-200",
+              "text-purple-700"
+            )}
+          >
+            {translations[language].team.heading}
+          </h2>
+          <p
+            className={themedClass(
+              "max-w-3xl mx-auto text-lg leading-relaxed",
+              "text-gray-300",
+              "text-gray-700"
+            )}
+          >
+            {translations[language].team.desc}
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-8 px-4 md:px-12">
-          {[
-            {
-              nameKey: 'team1Name',
-              roleKey: 'team1Role',
-              hoverKey: 'team1Hover',
-              img: image3,
-            },
-            {
-              nameKey: 'team2Name',
-              roleKey: 'team2Role',
-              hoverKey: 'team2Hover',
-              img: image2,
-            },
-            {
-              nameKey: 'team3Name',
-              roleKey: 'team3Role',
-              hoverKey: 'team3Hover',
-              img: image,
-            }
-          ].map((member, index) => (
+        <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {translations[language].team.members.map((member, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.02 }}
-              className="group relative overflow-hidden rounded-xl shadow-lg"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isVisible[3] ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.2, duration: 0.7 }}
+              whileHover={{ scale: 1.05 }}
+              className={themedClass(
+                "relative flex flex-col items-center text-center rounded-3xl shadow-xl overflow-hidden backdrop-blur-lg transition-all duration-500 group",
+                "bg-white/10 border border-purple-400/30",
+                "bg-white border border-purple-200"
+              )}
             >
-              <img
-                src={member.img}
-                alt={t(member.nameKey)}
-                className="w-full h-85 object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-              <div className="absolute bottom-0 left-0 p-6 text-white">
-                <h3 className="text-2xl font-bold">{t(member.nameKey)}</h3>
-                <p className="text-green-300">{t(member.roleKey)}</p>
+              <div className="relative mt-8">
+                <div className="absolute inset-0 w-40 h-40 rounded-full bg-gradient-to-tr from-purple-500 to-purple-700 blur-md opacity-60 group-hover:opacity-90 transition"></div>
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="relative w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
-              <div className="absolute inset-0 flex items-center justify-center p-6 bg-black bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-                <p>{t(member.hoverKey)}</p>
+              <div className="p-6">
+                <h3
+                  className={themedClass(
+                    "text-xl font-bold mb-2",
+                    "text-purple-200",
+                    "text-purple-700"
+                  )}
+                >
+                  {member.name}
+                </h3>
+                <p
+                  className={themedClass(
+                    "text-base font-medium",
+                    "text-purple-400",
+                    "text-purple-600"
+                  )}
+                >
+                  {member.role}
+                </p>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-800/90 to-purple-600/90 text-white px-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="text-lg leading-relaxed">{member.hoverText}</p>
               </div>
             </motion.div>
           ))}
@@ -640,162 +1016,213 @@ const AboutUs = () => {
       </section>
 
       {/* Section 5: Testimonials */}
-      <section className={themedClass(
-        "py-20 px-4 w-full font-poppins",
-        "bg-[#1E2A38]",
-        "bg-green-50"
-      )}>
-        <div className="max-w-7xl mx-auto">
+      <section
+        className={themedClass(
+          "py-24 px-6 w-full font-poppins relative overflow-hidden",
+          "bg-gradient-to-b from-[#1b1030] via-[#2a1b47] to-[#1b1030]",
+          "bg-purple-50"
+        )}
+        dir={isRTL ? "rtl" : "ltr"}
+      >
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial="hidden"
-            animate={isVisible[4] ? "visible" : "hidden"}
-            variants={fadeIn}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className={themedClass(
-              "text-3xl md:text-4xl font-bold mb-6",
-              "text-green-200",
-              "text-green-600"
-            )}>{t('testimonialsHeading')}</h2>
-            <p className={themedClass(
-              "max-w-3xl mx-auto text-lg",
-              "text-gray-300",
-              "text-gray-800"
-            )}>
-              {t('testimonialsSubtitle')}
+            <h2
+              className={themedClass(
+                "text-4xl md:text-5xl font-extrabold mb-4",
+                "text-purple-300 drop-shadow-lg",
+                "text-purple-700"
+              )}
+            >
+              {translations[language].testimonials.heading}
+            </h2>
+            <p
+              className={themedClass(
+                "max-w-2xl mx-auto text-lg leading-relaxed",
+                "text-gray-300",
+                "text-gray-700"
+              )}
+            >
+              {translations[language].testimonials.desc}
             </p>
           </motion.div>
-          <div className="relative flex overflow-hidden h-96">
-            {testimonials.map((testimonial, index) => (
+          <div className="relative h-[420px] flex items-center justify-center">
+            {translations[language].testimonials.items.map((testimonial, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{
                   opacity: activeTestimonial === index ? 1 : 0,
-                  x: activeTestimonial === index ? 0 : (index < activeTestimonial ? -50 : 50)
+                  scale: activeTestimonial === index ? 1 : 0.9,
+                  y: activeTestimonial === index ? 0 : 40,
                 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.7, ease: "easeInOut" }}
                 className={themedClass(
-                  `absolute inset-0 p-8 rounded-xl shadow-md flex flex-col items-center text-center ${activeTestimonial === index ? 'z-10' : 'z-0'}`,
-                  "bg-[#22304a]",
+                  `absolute inset-0 p-10 rounded-2xl shadow-2xl flex flex-col items-center text-center transition-all duration-500 ${
+                    activeTestimonial === index ? "z-20" : "z-0"
+                  }`,
+                  "bg-gradient-to-tr from-[#2d1e4d] to-[#3d2b70]",
                   "bg-white"
                 )}
               >
-                <img
+                <motion.img
                   src={testimonial.img}
-                  alt={t(testimonial.nameKey)}
-                  className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-200"
+                  alt={testimonial.name}
+                  className="w-28 h-28 rounded-full object-cover mb-6 border-4 border-purple-400 shadow-lg"
+                  animate={{
+                    y: [0, -8, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                 />
-                <p className={themedClass(
-                  "text-lg mb-6",
-                  "text-gray-300",
-                  "text-gray-800"
-                )}>
-                  {t(testimonial.quoteKey)} {testimonial.extraText}
+                <p
+                  className={themedClass(
+                    "text-xl mb-6 italic leading-relaxed",
+                    "text-gray-200",
+                    "text-gray-800"
+                  )}
+                >
+                  “{testimonial.quote}”
                 </p>
                 <div>
-                  <p className="font-bold">{t(testimonial.nameKey)}</p>
-                  <p className={themedClass(
-                    "",
-                    "text-green-200",
-                    "text-green-600"
-                  )}>{t(testimonial.roleKey)}</p>
+                  <p className="font-semibold text-lg">{testimonial.name}</p>
+                  <p
+                    className={themedClass(
+                      "text-sm mt-1",
+                      "text-purple-300",
+                      "text-purple-600"
+                    )}
+                  >
+                    {testimonial.role}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
-          <div className="flex justify-center mt-8 gap-2">
-            {testimonials.map((_, index) => (
-              <button
+          <div className="flex justify-center mt-10 gap-3">
+            {translations[language].testimonials.items.map((_, index) => (
+              <motion.button
                 key={index}
                 onClick={() => setActiveTestimonial(index)}
-                className={`w-3 h-3 rounded-full ${activeTestimonial === index ? 'bg-green-600' : 'bg-gray-300'}`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className={`w-4 h-4 rounded-full ${
+                  activeTestimonial === index
+                    ? "bg-purple-600 shadow-lg"
+                    : "bg-gray-400"
+                }`}
                 aria-label={`View testimonial ${index + 1}`}
               />
             ))}
           </div>
         </div>
+        <motion.div
+          className="absolute top-10 left-20 w-24 h-24 bg-purple-500 rounded-full opacity-20 blur-3xl"
+          animate={{ y: [0, -20, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-16 right-28 w-32 h-32 bg-purple-400 rounded-full opacity-20 blur-3xl"
+          animate={{ y: [0, 25, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
       </section>
 
       {/* Section 6: Join Us */}
       <section
-  className={themedClass(
-    "relative py-20 px-4 bg-fixed bg-cover bg-center w-full",
-    "",
-    ""
-  )}
-  style={{ backgroundImage: `url(${backgroundImage})` }}
->
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-  {/* Content */}
-  <div className="relative text-center max-w-6xl mx-auto z-10">
-    <motion.div
-      initial="hidden"
-      animate={isVisible[5] ? "visible" : "hidden"}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: { staggerChildren: 0.1 }
-        }
-      }}
-    >
-      {/* Heading */}
-      <motion.h2
-        variants={fadeIn}
-        className="text-3xl md:text-4xl font-serif font-bold mb-6 !text-white"
+        className={themedClass(
+          "relative py-28 px-6 bg-fixed bg-cover bg-center w-full text-white overflow-hidden",
+          "",
+          ""
+        )}
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+        dir={isRTL ? "rtl" : "ltr"}
       >
-        {t('ctaHeading')}
-      </motion.h2>
-
-      {/* Paragraph */}
-      <motion.p
-        variants={fadeIn}
-        className="text-xl mb-10 max-w-2xl mx-auto !text-white"
-      >
-        {t('ctaParagraph')}
-      </motion.p>
-
-      {/* Buttons */}
-      <motion.div
-        variants={fadeIn}
-        className="flex flex-wrap justify-center gap-4"
-      >
-        {/* Button 1 */}
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link
-            to="/contact"
-            className={themedClass(
-              "font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all inline-block",
-              "bg-[#00bfff] text-white hover:bg-green-700",
-              "bg-white text-white-600"
-            )}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <motion.div
+          className="absolute top-16 left-20 w-32 h-32 rounded-full bg-purple-500/30 blur-3xl"
+          animate={{ y: [0, -20, 0], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-32 w-40 h-40 rounded-full bg-pink-400/25 blur-3xl"
+          animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div className="relative text-center max-w-5xl mx-auto z-10">
+          <motion.div
+            initial="hidden"
+            animate={isVisible[5] ? "visible" : "hidden"}
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { staggerChildren: 0.15, duration: 0.8 }
+              }
+            }}
           >
-            {t('ctaBtn1')}
-          </Link>
-        </motion.div>
-
-        {/* Button 2 */}
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link
-            to="/services"
-            className={themedClass(
-              "bg-transparent border-2 font-bold py-3 px-8 rounded-full transition-all inline-block",
-              "border-[#00bfff] text-white hover:bg-[#00bfff] hover:text-white",
-              "border-green-600 text-white hover:bg-green-50 hover:text-green-600"
-            )}
-          >
-            {t('ctaBtn2')}
-          </Link>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  </div>
-</section>
-
-
+            <motion.h2
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              transition={{ type: "spring", stiffness: 70 }}
+              className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight drop-shadow-lg"
+            >
+              {translations[language].join.heading}
+            </motion.h2>
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              className="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-200"
+            >
+              {translations[language].join.sub}
+            </motion.p>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 }
+              }}
+              className="flex flex-wrap justify-center gap-5"
+            >
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/contact"
+                  className={themedClass(
+                    "font-bold py-3 px-8 rounded-full shadow-xl transition-all inline-block",
+                    "bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white hover:opacity-90 hover:shadow-2xl",
+                    "bg-white text-purple-700 hover:bg-purple-100"
+                  )}
+                >
+                  {translations[language].join.book}
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/services"
+                  className={themedClass(
+                    "border-2 font-bold py-3 px-8 rounded-full transition-all inline-block",
+                    "border-purple-400 text-purple-200 hover:bg-purple-500/20 hover:border-purple-300",
+                    "border-purple-600 text-purple-700 hover:bg-purple-100 hover:text-purple-900"
+                  )}
+                >
+                  {translations[language].join.explore}
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };

@@ -9,179 +9,309 @@ import image4 from '../assets/SR.jpg';
 import image5 from '../assets/HD.jpg';
 import image6 from '../assets/WC.jpg';
 import backgroundImage from '../assets/Mindful.jpg';
+import healthImg from "../assets/health.jpg";
 
-const THEME_KEY = 'theme';
+const THEME_KEY = "theme";
+const LANGUAGE_KEY = "language";
 
-// Translations and language helpers
-const TRANSLATIONS = {
+const translations = {
   en: {
-    heroTitle: 'Our services',
-    heroSubtitle: 'Discover our holistic approach to health and wellness',
-    heroCta: 'Explore Blogs',
-    service1Title: 'Personalized Nutrition',
-    service1Desc: 'Tailored meal plans designed by certified nutritionists to meet your unique dietary needs.',
-    service1Detail: 'Our nutrition plans are customized for your lifestyle, helping you achieve balanced energy, improved digestion, and overall vitality.',
-    service1Btn: 'Learn More',
-    service2Title: 'Mindful Movement',
-    service2Desc: 'Gentle yoga and meditation classes to connect mind and body for holistic wellbeing.',
-    service2Detail: 'Mindful movement sessions enhance flexibility, reduce stress, and strengthen the mind-body connection for holistic wellness.',
-    service2Btn: 'View Schedule',
-    service3Title: 'Sleep Optimization',
-    service3Desc: 'Science-backed techniques to improve sleep quality and establish healthy circadian rhythms.',
-    service3Detail: 'Sleep optimization programs guide you to establish restorative nightly routines, improving energy, focus, and overall health.',
-    service3Btn: 'Rest Better',
-    service4Title: 'Stress Resilience',
-    service4Desc: 'Evidence-based programs to build emotional resilience and manage stress effectively.',
-    service4Detail: 'Stress resilience programs teach techniques to manage daily pressures and maintain emotional balance, supporting mental wellbeing.',
-    service4Btn: 'Find Balance',
-    service5Title: 'Holistic Detox',
-    service5Desc: 'Gentle, comprehensive detox programs to cleanse your body and renew your energy.',
-    service5Detail: 'Holistic detox gently cleanses your body, supports liver function, boosts immunity, and increases energy levels naturally.',
-    service5Btn: 'Cleanse Now',
-    service6Title: 'Wellness Coaching',
-    service6Desc: 'One-on-one guidance to help you achieve sustainable lifestyle changes and personal growth.',
-    service6Detail: 'Wellness coaching provides personalized guidance for sustainable lifestyle changes, goal setting, and personal growth.',
-    service6Btn: 'Get Started',
-    ctaHeading: 'Ready to Transform Your Health?',
-    ctaBody: 'Your journey towards a healthier, happier life begins here. Our wellness programs are tailored to your lifestyle, combining nutrition guidance, fitness coaching, and mindfulness practices to create a holistic path to wellbeing. With our team of experienced professionals, every step you take is supported, motivated, and guided so you can achieve sustainable results. Embrace a balanced approach to your health, unlock your potential, and experience the transformation that comes with taking care of your body, mind, and soul.',
-    ctaBtn1: 'View Blogs',
-    ctaBtn2: 'Book Consultation',
-    successHeading: 'Success Stories',
-    successBody: 'Our clients have achieved amazing results and transformed their lives. These stories reflect their commitment, determination, and the guidance of our wellness programs.',
-    success1Title: 'Improved Fitness',
-    success1Desc: 'Clients have gained strength, stamina, and confidence through personalized training programs.',
-    success2Title: 'Mindful Lifestyle',
-    success2Desc: 'Individuals have incorporated mindfulness and stress management techniques into their daily routine.',
-    success3Title: 'Better Nutrition',
-    success3Desc: 'Clients report healthier eating habits and improved energy levels thanks to tailored nutrition plans.',
-    tipsHeading: 'Wellness Tips for a Healthier You',
-    tip1Title: 'Eat Balanced',
-    tip1Desc: 'Focus on whole foods, fruits, and vegetables for optimal energy and vitality throughout your day. Avoid processed foods and sugary drinks for better health.',
-    tip2Title: 'Sleep Well',
-    tip2Desc: 'Maintain a regular sleep schedule, reduce screen time before bed, and create a calming nighttime routine. Quality sleep helps your body recover and rejuvenate.',
-    tip3Title: 'Stay Active',
-    tip3Desc: 'Incorporate movement into your daily routine—walk, stretch, or exercise regularly to keep your body agile and strong. Even 30 minutes a day makes a difference.',
-    workshopHeading: 'Join Our Interactive Workshops',
-    workshopBody: 'Participate in our engaging wellness workshops designed to provide practical skills and strategies for a healthier, happier lifestyle. Each session is crafted to empower you with knowledge and hands-on techniques you can apply every day.',
-    workshopBtn: 'Register Now',
+    hero: {
+      heading: "Our Services",
+      sub: "Explore our holistic approach to health and wellness.",
+      button: "Explore Blogs",
+    },
+    services: [
+      {
+        title: "Personalized Nutrition",
+        description: "Tailored meal plans designed by certified nutritionists to meet your unique dietary needs.",
+        icon: image,
+        buttonText: "Learn More",
+        extra: "Tailored nutrition plans to fuel your energy and overall vitality."
+      },
+      {
+        title: "Mindful Movement",
+        description: "Gentle yoga and meditation classes to connect mind and body for holistic wellbeing.",
+        icon: image2,
+        buttonText: "View Schedule",
+        extra: "Movement sessions for strength, balance, and stress relief."
+      },
+      {
+        title: "Sleep Optimization",
+        description: "Science-backed techniques to improve sleep quality and establish healthy circadian rhythms.",
+        icon: image3,
+        buttonText: "Rest Better",
+        extra: "Sleep routines designed to recharge your body and mind."
+      },
+      {
+        title: "Stress Resilience",
+        description: "Evidence-based programs to build emotional resilience and manage stress effectively.",
+        icon: image4,
+        buttonText: "Find Balance",
+        extra: "Learn stress resilience and emotional balance techniques."
+      },
+      {
+        title: "Holistic Detox",
+        description: "Gentle, comprehensive detox programs to cleanse your body and renew your energy.",
+        icon: image5,
+        buttonText: "Cleanse Now",
+        extra: "Gentle detox programs that boost immunity and energy levels."
+      },
+      {
+        title: "Wellness Coaching",
+        description: "One-on-one guidance to help you achieve sustainable lifestyle changes and personal growth.",
+        icon: image6,
+        buttonText: "Get Started",
+        extra: "One-on-one coaching for lasting personal growth & lifestyle change."
+      }
+    ],
+    cta: {
+      heading: "Redefine Your Wellbeing",
+      desc: "Elevate your lifestyle with clarity and balance. Our holistic approach blends fitness, mindfulness, and personalized nutrition to create a sustainable path to your best self.",
+      button1: "Explore Programs",
+      button2: "Join Today"
+    },
+    stories: {
+      heading: "Success Stories",
+      desc: "Hear from people who transformed their lives with our wellness programs. Each story reflects dedication, growth, and sustainable lifestyle changes.",
+      items: [
+        { icon: "💪", title: "Improved Fitness", desc: "Strength, stamina, and confidence built with personalized programs." },
+        { icon: "🧘", title: "Mindful Lifestyle", desc: "Balanced routines with mindfulness and stress management." },
+        { icon: "🌱", title: "Better Nutrition", desc: "Healthier eating habits and sustained energy with tailored nutrition." }
+      ]
+    },
+    tips: [
+      {
+        icon: "🍇",
+        title: "Nourish Naturally",
+        desc: "Choose vibrant, nutrient-rich meals to fuel your body and mind. Fresh fruits, vegetables, and whole grains can do wonders.",
+      },
+      {
+        icon: "🛌",
+        title: "Rest & Recharge",
+        desc: "A healthy sleep routine is the foundation of energy. Prioritize deep rest to restore both your physical and mental balance.",
+      },
+      {
+        icon: "🚶‍♀️",
+        title: "Move with Purpose",
+        desc: "Daily activity doesn’t need to be intense—walk, stretch, dance, or play. Consistency matters more than intensity.",
+      },
+      {
+        icon: "🧘‍♀️",
+        title: "Mindful Moments",
+        desc: "Take short breaks to breathe, reflect, and reset. Even 5 minutes of mindfulness can shift your entire day.",
+      },
+    ],
+    workshop: {
+      heading: "Join Our Interactive Workshops",
+      desc: "Engage in dynamic wellness sessions designed to energize your body and mind",
+      button1: "Register Now",
+      button2: "View Schedule"
+    }
   },
   ar: {
-    heroTitle: 'أعد تنشيط عافيتك',
-    heroSubtitle: 'اكتشف نهجنا الشامل للصحة والعافية',
-    heroCta: 'استكشف المدونات',
-    service1Title: 'تغذية شخصية',
-    service1Desc: 'خطط وجبات مصممة خصيصًا من قبل أخصائيي تغذية لتلبية احتياجاتك.',
-    service1Detail: 'خطط التغذية لدينا مخصصة لأسلوب حياتك، وتساعدك على تحقيق طاقة متوازنة وتحسين الهضم والحيوية.',
-    service1Btn: 'اعرف المزيد',
-    service2Title: 'حركة واعية',
-    service2Desc: 'يوجا وتأمل لطيفان لربط العقل بالجسم من أجل عافية شاملة.',
-    service2Detail: 'جلسات الحركة الواعية تعزز المرونة وتقلل التوتر وتقوي اتصال العقل بالجسم.',
-    service2Btn: 'عرض الجداول',
-    service3Title: 'تحسين النوم',
-    service3Desc: 'تقنيات مدعومة علميًا لتحسين جودة النوم وضبط الإيقاع اليومي.',
-    service3Detail: 'برامج تحسين النوم ترشدك إلى روتين ليلي مرمم، مما يحسن الطاقة والتركيز والصحة العامة.',
-    service3Btn: 'نم أفضل',
-    service4Title: 'المرونة أمام التوتر',
-    service4Desc: 'برامج قائمة على الأدلة لبناء المرونة العاطفية وإدارة التوتر بفعالية.',
-    service4Detail: 'تعلّم برامج المرونة أمام التوتر تقنيات لإدارة ضغوط الحياة اليومية والحفاظ على التوازن العاطفي.',
-    service4Btn: 'اعثر على توازن',
-    service5Title: 'إزالة سموم شاملة',
-    service5Desc: 'برامج تنظيف لطيفة وشاملة لتطهير الجسم وتجديد الطاقة.',
-    service5Detail: 'يزيل التنظيف الشامل السموم بلطف، ويدعم الكبد، ويعزز المناعة، ويرفع مستويات الطاقة طبيعيًا.',
-    service5Btn: 'ابدأ التنقية',
-    service6Title: 'تدريب على العافية',
-    service6Desc: 'إرشاد فردي لمساعدتك على تحقيق تغييرات نمط حياة مستدامة ونمو شخصي.',
-    service6Detail: 'يوفر تدريب العافية إرشادًا شخصيًا لتغييرات نمط حياة مستدامة وتحديد الأهداف والنمو الشخصي.',
-    service6Btn: 'ابدأ الآن',
-    ctaHeading: 'هل أنت مستعد لتحويل صحتك؟',
-    ctaBody: 'تبدأ رحلتك نحو حياة أكثر صحة وسعادة من هنا...',
-    ctaBtn1: 'عرض المدونات',
-    ctaBtn2: 'احجز استشارة',
-    successHeading: 'قصص نجاح',
-    successBody: 'حقق عملاؤنا نتائج مذهلة وغيروا حياتهم...',
-    success1Title: 'لياقة محسّنة',
-    success1Desc: 'اكتسب العملاء قوة وقدرة وثقة عبر برامج مخصصة.',
-    success2Title: 'أسلوب حياة يقظ',
-    success2Desc: 'أدمج الأفراد اليقظة وإدارة التوتر في روتينهم اليومي.',
-    success3Title: 'تغذية أفضل',
-    success3Desc: 'يبلغ العملاء عن عادات أكل صحية وطاقة محسنة.',
-    tipsHeading: 'نصائح للعافية من أجلك',
-    tip1Title: 'تناول بتوازن',
-    tip1Desc: 'ركز على الأطعمة الكاملة والفواكه والخضروات للحصول على طاقة...',
-    tip2Title: 'نم جيدًا',
-    tip2Desc: 'حافظ على جدول نوم منتظم وقلل الشاشات قبل النوم...',
-    tip3Title: 'ابق نشطًا',
-    tip3Desc: 'ادمج الحركة في روتينك اليومي — حتى 30 دقيقة تحدث فرقًا.',
-    workshopHeading: 'انضم إلى ورش العمل التفاعلية لدينا',
-    workshopBody: 'شارك في ورش عافية شيّقة تمنحك مهارات واستراتيجيات عملية...',
-    workshopBtn: 'سجّل الآن',
+    hero: {
+      heading: "خدماتنا",
+      sub: "اكتشف نهجنا الشامل للصحة والعافية.",
+      button: "استكشف المدونات",
+    },
+    services: [
+      {
+        title: "التغذية الشخصية",
+        description: "خطط وجبات مصممة خصيصًا لتلبية احتياجاتك الغذائية الفريدة.",
+        icon: image,
+        buttonText: "اعرف المزيد",
+        extra: "خطط تغذية مخصصة لتعزيز الطاقة والحيوية."
+      },
+      {
+        title: "الحركة الواعية",
+        description: "دروس يوغا وتأمل لطيفة لربط العقل بالجسم من أجل صحة شاملة.",
+        icon: image2,
+        buttonText: "عرض الجدول",
+        extra: "جلسات حركة للقوة والتوازن وتخفيف التوتر."
+      },
+      {
+        title: "تحسين النوم",
+        description: "تقنيات مدعومة علميًا لتحسين جودة النوم وتنظيم الإيقاع الحيوي.",
+        icon: image3,
+        buttonText: "نم أفضل",
+        extra: "روتينات نوم مصممة لإعادة شحن الجسم والعقل."
+      },
+      {
+        title: "المرونة ضد التوتر",
+        description: "برامج قائمة على الأدلة لبناء المرونة العاطفية وإدارة التوتر.",
+        icon: image4,
+        buttonText: "ابحث عن التوازن",
+        extra: "تعلم تقنيات المرونة والتوازن العاطفي."
+      },
+      {
+        title: "التخلص الشامل من السموم",
+        description: "برامج لطيفة وشاملة لتنظيف الجسم وتجديد الطاقة.",
+        icon: image5,
+        buttonText: "ابدأ التنظيف",
+        extra: "برامج تنظيف لطيفة تعزز المناعة والطاقة."
+      },
+      {
+        title: "تدريب العافية",
+        description: "إرشاد فردي لمساعدتك على تحقيق تغييرات مستدامة في نمط الحياة والنمو الشخصي.",
+        icon: image6,
+        buttonText: "ابدأ الآن",
+        extra: "تدريب فردي لنمو شخصي وتغيير نمط حياة دائم."
+      }
+    ],
+    cta: {
+      heading: "أعد تعريف رفاهيتك",
+      desc: "ارتقِ بأسلوب حياتك مع الوضوح والتوازن. نهجنا الشامل يمزج بين اللياقة واليقظة والتغذية الشخصية لخلق طريق مستدام نحو أفضل نسخة منك.",
+      button1: "استكشف البرامج",
+      button2: "انضم اليوم"
+    },
+    stories: {
+      heading: "قصص النجاح",
+      desc: "استمع إلى أشخاص غيروا حياتهم من خلال برامج العافية لدينا. كل قصة تعكس التفاني والنمو والتغيير المستدام.",
+      items: [
+        { icon: "💪", title: "لياقة محسنة", desc: "قوة وقدرة وثقة تم بناؤها ببرامج مخصصة." },
+        { icon: "🧘", title: "أسلوب حياة واعي", desc: "روتينات متوازنة مع اليقظة وإدارة التوتر." },
+        { icon: "🌱", title: "تغذية أفضل", desc: "عادات أكل صحية وطاقة مستدامة مع تغذية مخصصة." }
+      ]
+    },
+    tips: [
+      {
+        icon: "🍇",
+        title: "غذِ نفسك طبيعيًا",
+        desc: "اختر وجبات غنية بالمغذيات لتعزيز الجسم والعقل. الفواكه والخضروات والحبوب الكاملة مفيدة جدًا.",
+      },
+      {
+        icon: "🛌",
+        title: "استرح واشحن طاقتك",
+        desc: "روتين نوم صحي هو أساس الطاقة. احرص على الراحة العميقة لاستعادة التوازن الجسدي والعقلي.",
+      },
+      {
+        icon: "🚶‍♀️",
+        title: "تحرك بهدف",
+        desc: "النشاط اليومي لا يحتاج أن يكون مكثفًا—امشِ، تمدد، ارقص أو العب. الاستمرارية أهم من الشدة.",
+      },
+      {
+        icon: "🧘‍♀️",
+        title: "لحظات واعية",
+        desc: "خذ فترات قصيرة للتنفس والتأمل وإعادة الضبط. حتى 5 دقائق من اليقظة يمكن أن تغير يومك.",
+      },
+    ],
+    workshop: {
+      heading: "انضم إلى ورش العمل التفاعلية",
+      desc: "شارك في جلسات العافية الديناميكية المصممة لتنشيط الجسم والعقل",
+      button1: "سجل الآن",
+      button2: "عرض الجدول"
+    }
   },
   he: {
-    heroTitle: 'רענן את איכות החיים שלך',
-    heroSubtitle: 'גלה את הגישה ההוליסטית שלנו לבריאות ורווחה',
-    heroCta: 'גלה בלוגים',
-    service1Title: 'תזונה מותאמת אישית',
-    service1Desc: 'תוכניות ארוחות מותאמות אישית על ידי תזונאים מוסמכים.',
-    service1Detail: 'התוכניות שלנו מותאמות לאורח חייך, מאזנות אנרגיה ומשפרות עיכול וחיוניות.',
-    service1Btn: 'למד עוד',
-    service2Title: 'תנועה מודעת',
-    service2Desc: 'יוגה ומדיטציה עדינות לחיבור גוף-נפש.',
-    service2Detail: 'מפגשי תנועה מודעת משפרים גמישות, מפחיתים סטרס ומחזקים חיבור גוף-נפש.',
-    service2Btn: 'צפה בלוח זמנים',
-    service3Title: 'אופטימיזציית שינה',
-    service3Desc: 'טכניקות מבוססות-מדע לשיפור איכות השינה והקצבים הצירקדיים.',
-    service3Detail: 'תוכניות שינה מדריכות לשגרות לילה משקמות...',
-    service3Btn: 'לישון טוב יותר',
-    service4Title: 'חוסן מול סטרס',
-    service4Desc: 'תוכניות מבוססות ראיות לבניית חוסן רגשי וניהול סטרס.',
-    service4Detail: 'התוכניות מלמדות טכניקות לניהול לחצים ושמירה על איזון רגשי.',
-    service4Btn: 'מצא איזון',
-    service5Title: 'ניקוי רעלים הוליסטי',
-    service5Desc: 'תוכניות ניקוי עדינות ומקיפות לטיהור הגוף וחידוש אנרגיה.',
-    service5Detail: 'ניקוי הוליסטי מטהר בעדינות, תומך בכבד ומגביר אנרגיה באופן טבעי.',
-    service5Btn: 'התחל ניקוי',
-    service6Title: 'אימון לרווחה',
-    service6Desc: 'ליווי אישי לשינויים בני-קיימא באורח החיים וצמיחה אישית.',
-    service6Detail: 'אימון רווחה מספק ליווי מותאם לשינויים מתמשכים, יעדים וצמיחה.',
-    service6Btn: 'התחל',
-    ctaHeading: 'מוכנים לשנות את הבריאות שלכם?',
-    ctaBody: 'המסע לחיים בריאים ומאושרים מתחיל כאן...',
-    ctaBtn1: 'צפה בבלוגים',
-    ctaBtn2: 'קבע ייעוץ',
-    successHeading: 'סיפורי הצלחה',
-    successBody: 'לקוחותינו השיגו תוצאות מדהימות ושינו את חייהם...',
-    success1Title: 'כושר משופר',
-    success1Desc: 'לקוחות צברו כוח, סבולת וביטחון באמצעות אימונים מותאמים.',
-    success2Title: 'אורח חיים מודע',
-    success2Desc: 'אנשים שילבו מיינדפולנס וניהול סטרס בשגרה היומית.',
-    success3Title: 'תזונה טובה יותר',
-    success3Desc: 'לקוחות מדווחים על הרגלי אכילה בריאים ועלייה באנרגיה.',
-    tipsHeading: 'טיפים לרווחה לחיים בריאים יותר',
-    tip1Title: 'לאכול מאוזן',
-    tip1Desc: 'התמקדו במזון מלא, פירות וירקות לאנרגיה וחיוניות...',
-    tip2Title: 'לישון טוב',
-    tip2Desc: 'שמרו על שגרה קבועה והפחיתו זמן מסך לפני השינה...',
-    tip3Title: 'להישאר פעילים',
-    tip3Desc: 'שלבו תנועה ביומיום — אפילו 30 דק׳ עושות הבדל.',
-    workshopHeading: 'הצטרפו לסדנאות האינטראקטיביות שלנו',
-    workshopBody: 'השתתפו בסדנאות מעניינות שמעניקות מיומנויות ואסטרטגיות מעשיות...',
-    workshopBtn: 'הירשם עכשיו',
-  },
-};
-
-const getLanguage = () => {
-  if (typeof window === 'undefined') return 'en';
-  return localStorage.getItem('language') || 'en';
+    hero: {
+      heading: "השירותים שלנו",
+      sub: "גלה את הגישה ההוליסטית שלנו לבריאות ורווחה.",
+      button: "גלה בלוגים",
+    },
+    services: [
+      {
+        title: "תזונה מותאמת אישית",
+        description: "תוכניות ארוחות מותאמות אישית לצרכים התזונתיים שלך.",
+        icon: image,
+        buttonText: "למידע נוסף",
+        extra: "תוכניות תזונה מותאמות להמרצת אנרגיה וחיוניות."
+      },
+      {
+        title: "תנועה מודעת",
+        description: "שיעורי יוגה ומדיטציה עדינים לחיבור גוף ונפש לרווחה הוליסטית.",
+        icon: image2,
+        buttonText: "צפה בלו\"ז",
+        extra: "מפגשי תנועה לחוזק, איזון והפגת מתחים."
+      },
+      {
+        title: "אופטימיזציית שינה",
+        description: "טכניקות מבוססות מדע לשיפור איכות השינה והסדרת השעון הביולוגי.",
+        icon: image3,
+        buttonText: "שינה טובה יותר",
+        extra: "שגרות שינה שמטעינות את הגוף והנפש."
+      },
+      {
+        title: "חוסן נפשי",
+        description: "תוכניות מבוססות מחקר לבניית חוסן רגשי וניהול מתחים.",
+        icon: image4,
+        buttonText: "מצא איזון",
+        extra: "למד טכניקות לחוסן נפשי ואיזון רגשי."
+      },
+      {
+        title: "דיטוקס הוליסטי",
+        description: "תוכניות דיטוקס עדינות ומקיפות לניקוי הגוף וחידוש האנרגיה.",
+        icon: image5,
+        buttonText: "נקה עכשיו",
+        extra: "תוכניות דיטוקס שמחזקות את החיסון והאנרגיה."
+      },
+      {
+        title: "אימון רווחה",
+        description: "הכוונה אישית לשינויי אורח חיים ברי קיימא וצמיחה אישית.",
+        icon: image6,
+        buttonText: "התחל עכשיו",
+        extra: "אימון אישי לצמיחה ושינוי אורח חיים מתמשך."
+      }
+    ],
+    cta: {
+      heading: "הגדר מחדש את הרווחה שלך",
+      desc: "שדרג את אורח החיים שלך עם בהירות ואיזון. הגישה ההוליסטית שלנו משלבת כושר, מודעות ותזונה מותאמת ליצירת מסלול בר קיימא לגרסה הטובה ביותר שלך.",
+      button1: "גלה תוכניות",
+      button2: "הצטרף היום"
+    },
+    stories: {
+      heading: "סיפורי הצלחה",
+      desc: "שמעו מאנשים ששינו את חייהם עם תוכניות הרווחה שלנו. כל סיפור משקף התמדה, צמיחה ושינוי בר קיימא.",
+      items: [
+        { icon: "💪", title: "כושר משופר", desc: "חוזק, סיבולת וביטחון שנבנו עם תוכניות מותאמות." },
+        { icon: "🧘", title: "אורח חיים מודע", desc: "שגרות מאוזנות עם מודעות וניהול מתחים." },
+        { icon: "🌱", title: "תזונה טובה יותר", desc: "הרגלי אכילה בריאים ואנרגיה מתמשכת עם תזונה מותאמת." }
+      ]
+    },
+    tips: [
+      {
+        icon: "🍇",
+        title: "הזנה טבעית",
+        desc: "בחר ארוחות עשירות במזון להזנת הגוף והנפש. פירות, ירקות ודגנים מלאים עושים פלאים.",
+      },
+      {
+        icon: "🛌",
+        title: "מנוחה וטעינה",
+        desc: "שגרת שינה בריאה היא הבסיס לאנרגיה. תעדף מנוחה עמוקה לשיקום איזון פיזי ומנטלי.",
+      },
+      {
+        icon: "🚶‍♀️",
+        title: "תנועה עם מטרה",
+        desc: "פעילות יומית לא חייבת להיות אינטנסיבית—לך, תמתח, תרקוד או תשחק. עקביות חשובה יותר מעוצמה.",
+      },
+      {
+        icon: "🧘‍♀️",
+        title: "רגעים מודעים",
+        desc: "קח הפסקות קצרות לנשימה, הרהור ואיפוס. אפילו 5 דקות של מודעות יכולות לשנות את היום שלך.",
+      },
+    ],
+    workshop: {
+      heading: "הצטרף לסדנאות האינטראקטיביות שלנו",
+      desc: "השתתף במפגשי רווחה דינמיים שנועדו להמריץ את הגוף והנפש",
+      button1: "הרשם עכשיו",
+      button2: "צפה בלו\"ז"
+    }
+  }
 };
 
 const ServicesPage = () => {
-  const [language, setLanguage] = useState(getLanguage());
-  // Theme state and effect
   const [theme, setTheme] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem(THEME_KEY) || 'light';
     }
     return 'light';
+  });
+
+  const [language, setLanguage] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(LANGUAGE_KEY) || "en";
+    }
+    return "en";
   });
 
   useEffect(() => {
@@ -205,95 +335,40 @@ const ServicesPage = () => {
       };
       window.addEventListener('theme-changed', handleThemeChange);
       window.addEventListener('storage', handleThemeChange);
+
+      const handleLangChange = () => {
+        const newLang = localStorage.getItem(LANGUAGE_KEY) || "en";
+        setLanguage(newLang);
+      };
+      window.addEventListener("language-changed", handleLangChange);
+      window.addEventListener("storage", handleLangChange);
+
+      // Initial sync
+      setLanguage(localStorage.getItem(LANGUAGE_KEY) || "en");
+
       return () => {
         window.removeEventListener('theme-changed', handleThemeChange);
         window.removeEventListener('storage', handleThemeChange);
+        window.removeEventListener("language-changed", handleLangChange);
+        window.removeEventListener("storage", handleLangChange);
       };
     }
   }, []);
 
-  // Sync language changes
-  useEffect(() => {
-    const handleLanguageChange = () => {
-      setLanguage(getLanguage());
-    };
-    window.addEventListener('language-changed', handleLanguageChange);
-    window.addEventListener('storage', handleLanguageChange);
-    return () => {
-      window.removeEventListener('language-changed', handleLanguageChange);
-      window.removeEventListener('storage', handleLanguageChange);
-    };
-  }, []);
-
-  const t = (key) => TRANSLATIONS[language]?.[key] || TRANSLATIONS.en[key] || key;
-
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-
-  // Helper for theme-based class
   const themedClass = (base, dark, light) =>
     `${base} ${theme === 'dark' ? dark : light}`;
 
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const services = [
-    {
-      title: t('service1Title'),
-      description: t('service1Desc'),
-      icon: image,
-      bgColor: themedClass("","bg-[#1E2A38]","bg-white"),
-      buttonText: t('service1Btn')
-    },
-    {
-      title: t('service2Title'),
-      description: t('service2Desc'),
-      icon: image2,
-      bgColor: themedClass("","bg-[#22304a]","bg-green-50"),
-      buttonText: t('service2Btn')
-    },
-    {
-      title: t('service3Title'),
-      description: t('service3Desc'),
-      icon:  image3,
-      bgColor: themedClass("","bg-[#1E2A38]","bg-white"),
-      buttonText: t('service3Btn')
-    },
-    {
-      title: t('service4Title'),
-      description: t('service4Desc'),
-      icon: image4,
-      bgColor: themedClass("","bg-[#22304a]","bg-green-50"),
-      buttonText: t('service4Btn')
-    },
-    {
-      title: t('service5Title'),
-      description: t('service5Desc'),
-      icon: image5,
-      bgColor: themedClass("","bg-[#1E2A38]","bg-white"),
-      buttonText: t('service5Btn')
-    },
-    {
-      title: t('service6Title'),
-      description: t('service6Desc'),
-      icon: image6,
-      bgColor: themedClass("","bg-[#22304a]","bg-green-50"),
-      buttonText: t('service6Btn')
-    }
-  ];
+  const t = translations[language] || translations["en"];
+  const isRTL = language === "ar" || language === "he";
 
   return (
     <div className={themedClass(
       "overflow-hidden min-h-screen transition-colors duration-500",
       "bg-gray-900 text-gray-100",
       "bg-white text-gray-800"
-    )}>
-      
-
+    )} dir={isRTL ? "rtl" : "ltr"}>
       {/* Hero Section */}
-      <section className="w-full h-screen relative flex items-center justify-center text-white overflow-hidden">
+      <section className="w-full h-screen relative flex items-center justify-center text-white overflow-hidden" dir={isRTL ? "rtl" : "ltr"}>
         <video
           autoPlay
           loop
@@ -303,50 +378,90 @@ const ServicesPage = () => {
         >
           <source src={backgroudvedio} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="absolute inset-0 bg-black/50"></div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: "easeOut" }}
           viewport={{ once: true }}
           className="relative text-center px-4 z-10"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            {t('heroTitle')}
-          </h1>
-          <p className="text-xl md:text-2xl mb-8">
-            {t('heroSubtitle')}
-          </p>
+          <motion.h1
+            className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, type: "spring" }}
+          >
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-600 bg-clip-text text-transparent">
+              {t.hero.heading}
+            </span>
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-2xl mb-10 text-purple-100"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+          >
+            {t.hero.sub}
+          </motion.p>
           <motion.a
             href="/blog"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             className={themedClass(
-              "px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all",
-              "bg-[#00bfff] text-white",
-              "bg-white text-green-600"
+              "px-10 py-3 rounded-full font-semibold text-lg shadow-xl transition-all relative overflow-hidden",
+              "bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 text-white hover:shadow-purple-500/50",
+              "bg-white text-purple-700 hover:bg-purple-100"
             )}
           >
-            {t('heroCta')}
+            <span className="relative z-10">{t.hero.button}</span>
+            <motion.span
+              className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-500 opacity-40 blur-xl"
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
           </motion.a>
         </motion.div>
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 bg-purple-500/30 rounded-full blur-3xl"
+          animate={{ y: [0, -20, 0], opacity: [0.5, 0.9, 0.5] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-16 w-40 h-40 bg-pink-400/25 rounded-full blur-3xl"
+          animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
       </section>
 
       {/* Services Grid */}
-      <div className="w-full overflow-hidden">
-        {services.map((service, index) => (
-          <motion.section
-            key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className={`${service.bgColor} py-20 px-4 sm:px-6 lg:px-12 w-full`}
-          >
-            <div className={`max-w-7xl mx-auto flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-10 md:gap-20`}>
+      <div className="w-full py-20 px-6 lg:px-12">
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center text-4xl md:text-5xl font-bold mb-14 text-purple-600 drop-shadow-lg"
+        >
+          {t.hero.heading}
+        </motion.h2>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {t.services.map((service, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ y: -10, rotate: 1 }}
+              className={themedClass(
+                "relative group bg-gradient-to-br from-purple-950 via-black to-purple-900 rounded-2xl shadow-xl p-8 text-center overflow-hidden",
+                "relative group bg-gradient-to-br from-purple-50 via-white to-purple-100 rounded-2xl shadow-lg p-8 text-center overflow-hidden"
+              )}
+            >
+              <div className="absolute inset-0 bg-purple-400/20 blur-2xl opacity-0 group-hover:opacity-100 transition duration-500"></div>
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="w-44 h-44 md:w-52 md:h-52 rounded-xl overflow-hidden mb-8 md:mb-0 shadow-lg"
+                whileHover={{ scale: 1.15, rotate: -2 }}
+                transition={{ type: 'spring', stiffness: 200 }}
+                className="w-24 h-24 mx-auto mb-6 rounded-xl overflow-hidden shadow-lg border-2 border-purple-400"
               >
                 <img
                   src={service.icon}
@@ -354,360 +469,333 @@ const ServicesPage = () => {
                   className="w-full h-full object-cover"
                 />
               </motion.div>
-              <div className="flex-1">
-                <h2 className={themedClass(
-                  "text-3xl md:text-4xl font-bold mb-4",
-                  "text-green-200",
-                  "text-green-800"
-                )}>{service.title}</h2>
-                <p className={themedClass(
-                  "text-lg mb-6 text-justify",
-                  "text-gray-300",
-                  "text-gray-700"
-                )}>{service.description}</p>
-                <p className={themedClass(
-                  "mb-6 text-justify",
-                  "text-gray-400",
-                  "text-gray-600"
-                )}>
-                  {index === 0 && t('service1Detail')}
-                  {index === 1 && t('service2Detail')}
-                  {index === 2 && t('service3Detail')}
-                  {index === 3 && t('service4Detail')}
-                  {index === 4 && t('service5Detail')}
-                  {index === 5 && t('service6Detail')}
-                </p>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link
-                    to="/nutrition"
-                    className={themedClass(
-                      "px-6 py-3 rounded-full font-medium transition-colors inline-block",
-                      "bg-[#00bfff] text-white hover:bg-green-700",
-                      "bg-green-600 text-white hover:bg-green-700"
-                    )}
-                  >
-                    {service.buttonText}
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          </motion.section>
-        ))}
+              <h3
+                className={themedClass(
+                  "text-2xl font-semibold mb-4 text-white drop-shadow-lg group-hover:text-purple-300 transition-colors",
+                  "text-2xl font-semibold mb-4 text-purple-800 group-hover:text-purple-900 transition-colors"
+                )}
+              >
+                {service.title}
+              </h3>
+              <p
+                className={themedClass(
+                  "text-gray-50 text-base mb-6 leading-relaxed drop-shadow-lg",
+                  "text-gray-700 text-base mb-6 leading-relaxed"
+                )}
+              >
+                {service.description}
+              </p>
+              <p
+                className={themedClass(
+                  "text-gray-200 text-sm mb-8 leading-relaxed drop-shadow-md",
+                  "text-gray-600 text-sm mb-8 leading-relaxed"
+                )}
+              >
+                {service.extra}
+              </p>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/nutrition"
+                  className={themedClass(
+                    "inline-block px-6 py-3 rounded-full font-medium text-white bg-gradient-to-r from-purple-400 to-pink-400 shadow-lg hover:shadow-purple-400/90 transition-all",
+                    "inline-block px-6 py-3 rounded-full font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600 shadow-md hover:shadow-purple-500/70 transition-all"
+                  )}
+                >
+                  {service.buttonText}
+                </Link>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* CTA Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
+      <section
         className={themedClass(
-          "relative py-32 px-6 lg:px-20 overflow-hidden rounded-3xl shadow-lg",
-          "bg-gradient-to-b from-[#1E2A38] to-[#22304a]",
-          "bg-gradient-to-b from-green-100 to-green-200"
+          "relative py-28 px-6 lg:px-20 overflow-hidden",
+          "bg-gradient-to-br from-[#0a0815] via-[#1a0f2e] to-[#0a0815]",
+          "bg-gradient-to-br from-purple-50 via-white to-purple-100"
         )}
       >
-        {/* Decorative floating circles */}
-        <div className={themedClass(
-          "absolute top-10 left-10 w-32 h-32 rounded-full opacity-20 animate-pulse",
-          "bg-green-700",
-          "bg-green-300"
-        )}></div>
-        <div className={themedClass(
-          "absolute bottom-20 right-10 w-48 h-48 rounded-full opacity-25 animate-pulse",
-          "bg-green-800",
-          "bg-green-400"
-        )}></div>
-        <div className={themedClass(
-          "absolute top-1/3 right-1/4 w-24 h-24 rounded-full opacity-15 animate-pulse",
-          "bg-green-600",
-          "bg-green-200"
-        )}></div>
-
-        <motion.div
-          initial={{ y: 40, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-3xl mx-auto text-center"
-        >
-          <h2 className={themedClass(
-            "text-3xl md:text-4xl font-extrabold mb-6 drop-shadow-md",
-            "text-green-200",
-            "text-green-800"
-          )}>
-            {t('ctaHeading')}
-          </h2>
-
-          <p className={themedClass(
-            "text-md md:text-lg mb-10 leading-relaxed text-justify",
-            "text-green-100",
-            "text-green-900"
-          )}>
-            {t('ctaBody')}
-          </p>
-
-          <div className="flex flex-col sm:flex-row justify-center gap-6 mt-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            className="relative flex justify-center items-center"
+          >
             <motion.div
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0,0,0,0.15)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                to="/blog"
-                className={themedClass(
-                  "px-10 py-4 rounded-full font-semibold text-lg shadow-md transition-all inline-block text-center",
-                  "bg-[#00bfff] text-white",
-                  "bg-white text-green-700"
-                )}
-              >
-                {t('ctaBtn1')}
-              </Link>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0,0,0,0.15)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                to="/contact"
-                className={themedClass(
-                  "border-2 px-10 py-4 rounded-full font-semibold text-lg transition-all inline-block text-center",
-                  "border-[#00bfff] text-[#00bfff] hover:bg-[#00bfff] hover:text-white",
-                  "border-green-700 text-green-700 hover:bg-green-700 hover:text-white"
-                )}
-              >
-                {t('ctaBtn2')}
-              </Link>
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.section>
-
-      {/* --- New Section 1: Success Stories --- */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className={themedClass(
-          "w-full py-24 px-6 text-center",
-          "bg-[#1E2A38] text-green-200",
-          "bg-green-50 text-green-900"
-        )}
-      >
-        <h2 className={themedClass(
-          "text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-sm",
-          "text-green-200",
-          "text-green-800"
-        )}>
-          {t('successHeading')}
-        </h2>
-        <p className={themedClass(
-          "max-w-4xl mx-auto text-lg md:text-xl mb-12 leading-relaxed",
-          "text-green-100",
-          "text-green-900"
-        )}>
-          {t('successBody')}
-        </p>
-
-        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-10 max-w-full">
-          {[
-            {
-              icon: "💪",
-              title: t('success1Title'),
-              desc: t('success1Desc')
-            },
-            {
-              icon: "🧘",
-              title: t('success2Title'),
-              desc: t('success2Desc')
-            },
-            {
-              icon: "🌱",
-              title: t('success3Title'),
-              desc: t('success3Desc')
-            }
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ scale: 1.05, y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.15)" }}
+              animate={{
+                borderRadius: [
+                  "60% 40% 30% 70%/60% 30% 70% 40%",
+                  "50% 50% 30% 60%/50% 40% 60% 50%",
+                  "70% 30% 50% 50%/40% 60% 30% 70%",
+                  "60% 40% 30% 70%/60% 30% 70% 40%",
+                ],
+                scale: [1, 1.25, 0.95, 1.15, 1],
+                rotate: [0, 5, -5, 0],
+                filter: ["hue-rotate(0deg)", "hue-rotate(60deg)", "hue-rotate(120deg)", "hue-rotate(0deg)"],
+              }}
+              transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+              className="absolute w-[460px] h-[460px] md:w-[520px] md:h-[520px]
+              bg-gradient-to-tr from-pink-500/40 via-purple-500/40 to-indigo-500/40
+              blur-3xl"
+            ></motion.div>
+            <motion.img
+              src={healthImg}
+              alt="Wellness"
+              animate={{
+                borderRadius: [
+                  "60% 40% 30% 70%/60% 30% 70% 40%",
+                  "50% 50% 30% 60%/50% 40% 60% 50%",
+                  "70% 30% 50% 50%/40% 60% 30% 70%",
+                  "60% 40% 30% 70%/60% 30% 70% 40%",
+                ],
+              }}
+              transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
+              whileHover={{ scale: 1.1 }}
+              className="relative w-[420px] md:w-[500px] h-[500px] object-cover
+              shadow-2xl border-4 border-purple-500/30"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9 }}
+            className="relative z-10 text-center lg:text-left"
+          >
+            <h2
               className={themedClass(
-                "relative bg-gradient-to-br rounded-2xl shadow-md overflow-hidden p-8 transition-all",
-                "from-[#22304a] to-[#1E2A38]",
-                "from-green-100 to-green-200"
+                "text-3xl md:text-4xl font-extrabold mb-6 leading-snug",
+                "text-purple-200 drop-shadow-md",
+                "text-purple-800"
               )}
             >
-              {/* Accent strip on top */}
-              <div className={themedClass(
-                "absolute top-0 left-0 w-full h-2",
-                "bg-green-400",
-                "bg-green-600"
-              )}></div>
-
-              {/* Icon in circle */}
-              <div className={themedClass(
-                "flex items-center justify-center w-20 h-20 rounded-full text-4xl mb-6 mx-auto shadow-md",
-                "bg-green-700 text-white",
-                "bg-green-600 text-white"
-              )}>
-                {item.icon}
-              </div>
-
-              <h3 className={themedClass(
-                "text-2xl font-bold mb-3",
-                "text-green-200",
-                "text-green-800"
-              )}>{item.title}</h3>
-              <p className={themedClass(
-                "text-base md:text-lg leading-relaxed",
-                "text-green-100",
-                "text-green-900"
-              )}>{item.desc}</p>
-            </motion.div>
-          ))}
+              {t.cta.heading}
+            </h2>
+            <p
+              className={themedClass(
+                "text-lg mb-8 leading-relaxed max-w-xl",
+                "text-purple-100",
+                "text-gray-700"
+              )}
+            >
+              {t.cta.desc}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/programs"
+                  className="px-8 py-4 rounded-xl font-semibold text-lg shadow-lg
+                  bg-gradient-to-r from-purple-600 to-pink-500 text-white
+                  hover:shadow-pink-500/70 transition-all duration-300 inline-block"
+                >
+                  {t.cta.button1}
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  to="/contact"
+                  className="px-8 py-4 rounded-xl font-semibold text-lg border-2
+                  border-purple-500 text-purple-600 bg-white
+                  hover:bg-purple-600 hover:text-white transition-all duration-300 inline-block"
+                >
+                  {t.cta.button2}
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* --- New Section 2: Wellness Tips --- */}
+      {/* Success Stories */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className={themedClass(
-          "w-full py-24 px-6",
-          "bg-[#22304a]",
-          "bg-green-50"
+          "w-full py-24 px-6 text-center relative overflow-hidden",
+          "bg-gradient-to-br from-[#120023] via-[#1b0d35] to-[#120023] text-purple-100",
+          "bg-gradient-to-br from-purple-50 via-white to-purple-100 text-purple-900"
         )}
       >
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-purple-600/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-pink-500/30 rounded-full blur-3xl animate-pulse"></div>
         <h2 className={themedClass(
-          "text-4xl md:text-5xl font-extrabold mb-16 drop-shadow-sm text-center",
-          "text-green-200",
-          "text-green-700"
+          "text-4xl md:text-5xl font-extrabold mb-6 drop-shadow-lg tracking-wide",
+          "text-purple-200",
+          "text-purple-800"
         )}>
-          {t('tipsHeading')}
+          {t.stories.heading}
         </h2>
-
-        <div className="max-w-6xl mx-auto flex flex-col gap-16">
-          {[
-            {
-              icon: "🥗",
-              title: t('tip1Title'),
-              desc: t('tip1Desc')
-            },
-            {
-              icon: "💤",
-              title: t('tip2Title'),
-              desc: t('tip2Desc')
-            },
-            {
-              icon: "🏃‍♂️",
-              title: t('tip3Title'),
-              desc: t('tip3Desc')
-            }
-          ].map((tip, idx) => ( 
+        <p className={themedClass(
+          "max-w-3xl mx-auto text-lg md:text-xl mb-16 leading-relaxed",
+          "text-purple-100/90",
+          "text-purple-900"
+        )}>
+          {t.stories.desc}
+        </p>
+        <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          {t.stories.items.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: idx * 0.3 }}
-              className="flex flex-col md:flex-row items-start gap-8 md:gap-12 w-full"
+              whileHover={{ scale: 1.05 }}
+              className={themedClass(
+                "relative rounded-3xl p-8 backdrop-blur-md border-2 shadow-xl group transition-all duration-500",
+                "border-purple-500/40 bg-purple-900/40 hover:border-pink-400/70",
+                "border-purple-300 bg-white/60 hover:border-pink-500/50"
+              )}
             >
-              {/* Icon in larger circle */}
-              <div className={themedClass(
-                "flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-full text-4xl md:text-6xl flex items-center justify-center shadow-lg",
-                "bg-green-700 text-white",
-                "bg-green-700 text-white"
+              <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-purple-400 animate-pulse"></div>
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                className={themedClass(
+                  "flex items-center justify-center w-20 h-20 rounded-full text-4xl mb-6 mx-auto shadow-lg",
+                  "bg-gradient-to-tr from-purple-500 to-pink-500 text-white",
+                  "bg-gradient-to-tr from-purple-600 to-pink-400 text-white"
+                )}
+              >
+                {item.icon}
+              </motion.div>
+              <h3 className={themedClass(
+                "text-2xl font-bold mb-4",
+                "text-purple-200",
+                "text-purple-800"
               )}>
+                {item.title}
+              </h3>
+              <p className={themedClass(
+                "text-base md:text-lg leading-relaxed",
+                "text-purple-100/90",
+                "text-purple-800"
+              )}>
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Wellness Tips */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className={themedClass(
+          "w-full py-24 px-6 relative",
+          "bg-[#1b1033]",
+          "bg-purple-50"
+        )}
+      >
+        <h2
+          className={themedClass(
+            "text-4xl md:text-5xl font-extrabold mb-16 text-center tracking-wide",
+            "text-purple-200",
+            "text-purple-800"
+          )}
+        >
+          Wellness Tips to Elevate Your Life
+        </h2>
+        <div className="relative max-w-5xl mx-auto">
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-purple-500/40"></div>
+          {t.tips.map((tip, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -80 : 80 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: idx * 0.2 }}
+              className={`relative flex flex-col md:flex-row items-center mb-16 ${
+                idx % 2 === 0 ? "md:justify-start" : "md:justify-end"
+              }`}
+            >
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-2xl text-white shadow-lg z-10">
                 {tip.icon}
               </div>
-
-              {/* Text */}
-              <div className="text-left flex-1">
-                <h3 className={themedClass(
-                  "text-2xl md:text-3xl font-bold mb-3",
-                  "text-green-200",
-                  "text-green-800"
-                )}>{tip.title}</h3>
-                <p className={themedClass(
-                  "text-lg md:text-xl leading-relaxed",
-                  "text-green-100",
-                  "text-green-900"
-                )}>
-                  {tip.desc}
-                </p>
+              <div
+                className={themedClass(
+                  `mt-12 md:mt-0 md:w-1/2 p-6 rounded-xl shadow-lg transition-all duration-500 hover:scale-105`,
+                  "bg-purple-800/70 text-purple-100",
+                  "bg-purple-200 text-purple-900"
+                )}
+              >
+                <h3 className="text-2xl font-semibold mb-2">{tip.title}</h3>
+                <p className="text-lg leading-relaxed">{tip.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </motion.section>
 
-      {/* --- New Section 3: Book a Workshop --- */}
-      <motion.section
-  initial={{ opacity: 0, x: -50 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 1 }}
-  viewport={{ once: true }}
-  className={themedClass(
-    "relative py-32 px-4 sm:px-6 lg:px-8 text-center",
-    "text-white",
-    "text-white-900"
-  )}
-  style={{
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
-  }}
->
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-green-900 bg-opacity-50"></div>
-
-  {/* Content */}
-  <div className="relative z-10 max-w-3xl mx-auto">
-    <h2
-      className={themedClass(
-        "text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg",
-        "text-white",
-        "text-white-900"
-      )}
-    >
-      {t("workshopHeading")}
-    </h2>
-
-    {/* ✅ One-line paragraph */}
-    <p
-      className={themedClass(
-        "text-lg md:text-xl mb-8 drop-shadow-md",
-        "text-green-100",
-        "text-green-900"
-      )}
-    >
-      {t("Join us for an engaging workshop experience.", language)}
-    </p>
-
-    {/* Button */}
-    <motion.a
-      href="/contact"
-      whileHover={{
-        scale: 1.05,
-        boxShadow: "0 0 20px rgba(255,255,255,0.5)",
-      }}
-      whileTap={{ scale: 0.95 }}
-      className={themedClass(
-        "inline-block px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all",
-        "bg-white text-green-600",
-        "bg-green-700 text-white"
-      )}
-    >
-      {t("workshopBtn")}
-    </motion.a>
-  </div>
-</motion.section>
-
-
+      {/* Book a Workshop */}
+      <section
+        className={themedClass(
+          "relative py-32 px-6 text-center overflow-hidden",
+          "text-white",
+          "text-purple-900"
+        )}
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundAttachment: "fixed",
+        }}
+      >
+        <motion.div
+          className="absolute top-16 left-16 w-32 h-32 rounded-full bg-purple-500/40 blur-3xl z-0"
+          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-20 w-40 h-40 rounded-full bg-purple-700/40 blur-3xl z-0"
+          animate={{ y: [0, -40, 0], x: [0, -25, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div className="absolute inset-0 bg-black/70 z-10"></div>
+        <div className="relative z-20 max-w-3xl mx-auto">
+          <motion.h2
+            className="text-4xl md:text-5xl font-extrabold mb-6 text-white drop-shadow-lg"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            {t.workshop.heading}
+          </motion.h2>
+          <motion.p
+            className="text-lg md:text-xl mb-10 leading-relaxed text-gray-200 drop-shadow"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.25 }}
+          >
+            {t.workshop.desc}
+          </motion.p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(168,85,247,0.8)" }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-10 py-4 rounded-full font-semibold text-lg bg-purple-600 text-white shadow-lg transition-all"
+            >
+              {t.workshop.button1}
+            </motion.a>
+            <motion.a
+              href="/workshops"
+              whileHover={{ scale: 1.06, backgroundColor: "rgba(255,255,255,0.08)" }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block px-10 py-4 rounded-full font-semibold text-lg border border-white/80 text-white/95 backdrop-blur-sm transition-all"
+            >
+              {t.workshop.button2}
+            </motion.a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
 
 export default ServicesPage;
-

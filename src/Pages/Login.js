@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const THEME_KEY = "theme";
 const LANGUAGE_KEY = "language";
@@ -10,106 +11,61 @@ const translations = {
     signup: "Sign Up",
     email: "Email",
     password: "Password",
-    loginBtn: "Login",
-    signupBtn: "Sign Up",
-    noAccount: "Don't have an account? Sign up",
-    haveAccount: "Already have an account? Login",
     firstName: "First Name",
     lastName: "Last Name",
+    loginBtn: "Login",
+    signupBtn: "Sign Up",
+    switchToSignup: "Don't have an account? Sign Up",
+    switchToLogin: "Already have an account? Login",
     invalid: "Invalid email or password.",
-    exists: "User already exists.",
-    success: "Sign up successful! Please login.",
-    english: "English",
-    arabic: "Arabic",
-    hebrew: "Hebrew",
-    features: [
-      {
-        title: "Personalized Experience",
-        desc: "Your dashboard and recommendations adapt to your goals."
-      },
-      {
-        title: "Multi-language Support",
-        desc: "Switch between English, Arabic, and Hebrew instantly."
-      },
-      {
-        title: "Light & Dark Mode",
-        desc: "Enjoy a beautiful interface in any lighting."
-      }
-    ]
+    exists: "User already exists with this email.",
+    success: "Signup successful! Please login.",
+    light: "Light Mode",
+    dark: "Dark Mode",
+    selectLang: "Language",
   },
   ar: {
     login: "تسجيل الدخول",
     signup: "إنشاء حساب",
     email: "البريد الإلكتروني",
     password: "كلمة المرور",
-    loginBtn: "تسجيل الدخول",
-    signupBtn: "إنشاء حساب",
-    noAccount: "ليس لديك حساب؟ أنشئ حسابًا",
-    haveAccount: "لديك حساب بالفعل؟ تسجيل الدخول",
     firstName: "الاسم الأول",
     lastName: "اسم العائلة",
+    loginBtn: "دخول",
+    signupBtn: "إنشاء حساب",
+    switchToSignup: "ليس لديك حساب؟ أنشئ حساب",
+    switchToLogin: "لديك حساب بالفعل؟ تسجيل الدخول",
     invalid: "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-    exists: "المستخدم موجود بالفعل.",
+    exists: "يوجد مستخدم بهذا البريد الإلكتروني.",
     success: "تم إنشاء الحساب بنجاح! يرجى تسجيل الدخول.",
-    english: "الإنجليزية",
-    arabic: "العربية",
-    hebrew: "العبرية",
-    features: [
-      {
-        title: "تجربة مخصصة",
-        desc: "لوحتك وتوصياتك تتكيف مع أهدافك."
-      },
-      {
-        title: "دعم متعدد اللغات",
-        desc: "بدّل بين الإنجليزية والعربية والعبرية فورًا."
-      },
-      {
-        title: "الوضع الليلي والنهاري",
-        desc: "واجهة جميلة في جميع الأوقات."
-      }
-    ]
+    light: "الوضع الفاتح",
+    dark: "الوضع الداكن",
+    selectLang: "اللغة",
   },
   he: {
     login: "התחברות",
     signup: "הרשמה",
     email: "אימייל",
     password: "סיסמה",
-    loginBtn: "התחבר",
-    signupBtn: "הרשם",
-    noAccount: "אין לך חשבון? הירשם",
-    haveAccount: "כבר יש לך חשבון? התחבר",
     firstName: "שם פרטי",
     lastName: "שם משפחה",
+    loginBtn: "התחבר",
+    signupBtn: "הרשם",
+    switchToSignup: "אין לך חשבון? הרשם",
+    switchToLogin: "כבר יש לך חשבון? התחבר",
     invalid: "אימייל או סיסמה שגויים.",
-    exists: "המשתמש כבר קיים.",
-    success: "נרשמת בהצלחה! אנא התחבר.",
-    english: "אנגלית",
-    arabic: "ערבית",
-    hebrew: "עברית",
-    features: [
-      {
-        title: "חוויה מותאמת אישית",
-        desc: "הדשבורד וההמלצות מותאמים למטרות שלך."
-      },
-      {
-        title: "תמיכה רב-לשונית",
-        desc: "החלף בין אנגלית, ערבית ועברית מיד."
-      },
-      {
-        title: "מצב כהה ובהיר",
-        desc: "ממשק יפהפה בכל תאורה."
-      }
-    ]
-  }
+    exists: "משתמש כבר קיים עם אימייל זה.",
+    success: "ההרשמה הצליחה! אנא התחבר.",
+    light: "מצב בהיר",
+    dark: "מצב כהה",
+    selectLang: "שפה",
+  },
 };
-
-const t = (key, lang) => translations[lang]?.[key] || translations.en[key];
-
-const rtlLangs = ["ar", "he"];
 
 const Login = () => {
   const navigate = useNavigate();
 
+  // Theme state
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem(THEME_KEY) || "light";
@@ -117,6 +73,7 @@ const Login = () => {
     return "light";
   });
 
+  // Language state
   const [language, setLanguage] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem(LANGUAGE_KEY) || "en";
@@ -124,46 +81,44 @@ const Login = () => {
     return "en";
   });
 
+  // Listen to theme/language changes from storage or custom event
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const handleThemeChange = () => {
-        setTheme(localStorage.getItem(THEME_KEY) || "light");
-      };
-      window.addEventListener("theme-changed", handleThemeChange);
-      window.addEventListener("storage", handleThemeChange);
-
-      const handleLanguageChange = () => {
-        setLanguage(localStorage.getItem(LANGUAGE_KEY) || "en");
-      };
-      window.addEventListener("language-changed", handleLanguageChange);
-      window.addEventListener("storage", handleLanguageChange);
-
-      return () => {
-        window.removeEventListener("theme-changed", handleThemeChange);
-        window.removeEventListener("storage", handleThemeChange);
-        window.removeEventListener("language-changed", handleLanguageChange);
-        window.removeEventListener("storage", handleLanguageChange);
-      };
-    }
+    const handleThemeChange = () => {
+      setTheme(localStorage.getItem(THEME_KEY) || "light");
+    };
+    const handleLangChange = () => {
+      setLanguage(localStorage.getItem(LANGUAGE_KEY) || "en");
+    };
+    window.addEventListener("theme-changed", handleThemeChange);
+    window.addEventListener("storage", handleThemeChange);
+    window.addEventListener("language-changed", handleLangChange);
+    window.addEventListener("storage", handleLangChange);
+    return () => {
+      window.removeEventListener("theme-changed", handleThemeChange);
+      window.removeEventListener("storage", handleThemeChange);
+      window.removeEventListener("language-changed", handleLangChange);
+      window.removeEventListener("storage", handleLangChange);
+    };
   }, []);
 
-  // Sync theme and language with localStorage and document
-  useEffect(() => {
-    localStorage.setItem(THEME_KEY, theme);
-    document.documentElement.setAttribute("data-theme", theme);
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    localStorage.setItem(THEME_KEY, newTheme);
+    setTheme(newTheme);
     window.dispatchEvent(new Event("theme-changed"));
-  }, [theme]);
+  };
 
-  useEffect(() => {
-    localStorage.setItem(LANGUAGE_KEY, language);
-    document.documentElement.setAttribute("dir", rtlLangs.includes(language) ? "rtl" : "ltr");
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    localStorage.setItem(LANGUAGE_KEY, e.target.value);
     window.dispatchEvent(new Event("language-changed"));
-  }, [language]);
+  };
+
+  const t = translations[language] || translations.en;
+  const isRTL = language === "ar" || language === "he";
 
   const themedClass = (base, dark, light) =>
     `${base} ${theme === "dark" ? dark : light}`;
-
-  const dir = rtlLangs.includes(language) ? "rtl" : "ltr";
 
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signUpData, setSignUpData] = useState({
@@ -174,18 +129,6 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(true);
-
-  // Feature carousel state
-  const [featureIdx, setFeatureIdx] = useState(0);
-  const features = t("features", language);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFeatureIdx((prev) => (prev + 1) % features.length);
-    }, 3500);
-    return () => clearInterval(timer);
-    // eslint-disable-next-line
-  }, [features, language]);
 
   const handleLoginChange = (e) =>
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -220,7 +163,7 @@ const Login = () => {
       if (user.lastName) localStorage.setItem("lastname", user.lastName);
       navigate("/home1");
     } else {
-      setError(t("invalid", language));
+      setError(t.invalid);
     }
   };
 
@@ -229,286 +172,201 @@ const Login = () => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     if (users.find((user) => user.email === signUpData.email)) {
-      setError(t("exists", language));
+      setError(t.exists);
       return;
     }
 
     users.push(signUpData);
     localStorage.setItem("users", JSON.stringify(users));
     setError("");
-    alert(t("success", language));
+    alert(t.success);
     setSignUpData({ firstName: "", lastName: "", email: "", password: "" });
     setIsLogin(true);
   };
 
-  // --- THEME & LANGUAGE TOGGLE BUTTONS ---
-  const themeToggleBtn = (
-    <button
-      className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors duration-200 absolute top-4 right-4 z-10 ${theme === 'dark' ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-green-100 border-green-300 hover:bg-green-200'}`}
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      aria-label="Toggle dark mode"
-      type="button"
-    >
-      {theme === "dark" ? (
-        <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-8.66h-1M4.34 12H3m15.07 4.93l-.71-.71M6.34 6.34l-.71-.71m12.02 12.02l-.71-.71M6.34 17.66l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ) : (
-        <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      )}
-    </button>
-  );
-
-  const languageToggleBtn = (
-    <div className="absolute top-4 left-4 z-10 flex items-center">
-      <label htmlFor="language-select" className={`mr-2 text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>🌐</label>
-      <select
-        id="language-select"
-        value={language}
-        onChange={e => setLanguage(e.target.value)}
-        className={`text-sm rounded-md border px-2 py-1 focus:outline-none ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-300 text-gray-800'}`}
-      >
-        <option value="en">{t("english", language)}</option>
-        <option value="ar">{t("arabic", language)}</option>
-        <option value="he">{t("hebrew", language)}</option>
-      </select>
-    </div>
-  );
-
-  // Animated background style (light: animated gradient, dark: solid black)
-  const animatedBgLight =
-    "fixed inset-0 z-0 animate-gradient bg-gradient-to-br from-green-200 via-blue-200 to-purple-200";
-  const animatedBgDark =
-    "fixed inset-0 z-0 bg-black";
-
-  // Add keyframes for gradient animation (for light mode)
-  useEffect(() => {
-    const style = document.createElement("style");
-    style.innerHTML = `
-      @keyframes gradientMove {
-        0% { background-position: 0% 50% }
-        50% { background-position: 100% 50% }
-        100% { background-position: 0% 50% }
-      }
-      .animate-gradient {
-        background-size: 200% 200%;
-        animation: gradientMove 8s ease-in-out infinite;
-      }
-    `;
-    document.head.appendChild(style);
-    return () => { document.head.removeChild(style); };
-  }, []);
-
-  // Fade-in animation for login box
-  const [fadeIn, setFadeIn] = useState(false);
-  useEffect(() => {
-    setFadeIn(true);
-  }, []);
-
   return (
-    <div dir={dir} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ fontFamily: "Arial, sans-serif" }}>
-      <div className={theme === "dark" ? animatedBgDark : animatedBgLight} />
-      {themeToggleBtn}
-      {languageToggleBtn}
-      <div
-        className={`
-          w-full max-w-md p-8 rounded-xl shadow-lg relative z-10
-          ${theme === "dark" ? "bg-[#1a1a1a] text-green-100" : "bg-white text-green-900"}
-          ${fadeIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
-          transition-all duration-700
-        `}
-        style={{ boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)" }}
-      >
-        <h2
+    <div
+      className={themedClass(
+        "min-h-screen flex justify-center items-center relative overflow-hidden transition-colors duration-500",
+        "bg-black text-white",
+        "bg-white text-gray-900"
+      )}
+      dir={isRTL ? "rtl" : "ltr"}
+    >
+      {/* Theme & Language toggle */}
+      <div className={`absolute top-6 right-6 flex gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
+        <select
+          value={language}
+          onChange={handleLanguageChange}
           className={themedClass(
-            "text-3xl font-bold mb-6 text-center",
-            "text-green-200",
-            "text-green-700"
+            "px-3 py-2 rounded-full font-semibold shadow-md text-sm focus:outline-none focus:ring-2 focus:ring-purple-400",
+            "bg-purple-800 text-white",
+            "bg-purple-200 text-purple-900"
+          )}
+          aria-label={t.selectLang}
+        >
+          <option value="en">English</option>
+          <option value="ar">العربية</option>
+          <option value="he">עברית</option>
+        </select>
+        <button
+          onClick={toggleTheme}
+          className={themedClass(
+            "px-4 py-2 rounded-full font-semibold shadow-md transition-all",
+            "bg-purple-800 hover:bg-purple-700 text-white",
+            "bg-purple-200 hover:bg-purple-300 text-purple-900"
           )}
         >
-          {isLogin ? t("login", language) : t("signup", language)}
-        </h2>
+          {theme === "dark" ? t.light : t.dark}
+        </button>
+      </div>
 
+      {/* Animated background blobs */}
+      <motion.div
+        className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 rounded-full blur-3xl opacity-50"
+        animate={{ y: [0, 50, 0], x: [0, 30, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-r from-pink-400 via-purple-500 to-purple-600 rounded-full blur-3xl opacity-50"
+        animate={{ y: [0, -50, 0], x: [0, -30, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full blur-2xl opacity-40"
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Login/Signup Card */}
+      <motion.div
+        className={themedClass(
+          "w-full max-w-md p-10 rounded-3xl relative z-10 shadow-2xl border border-purple-700",
+          "bg-gray-900 text-white",
+          "bg-white text-gray-900"
+        )}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.h2
+          className="text-4xl font-bold mb-8 text-center text-purple-500"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, type: "spring" }}
+        >
+          {isLogin ? t.login : t.signup}
+        </motion.h2>
+
+        {/* Login Form */}
         {isLogin ? (
           <form onSubmit={handleLoginSubmit} className="flex flex-col gap-4">
-            <input
+            <motion.input
               className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
+                "p-4 rounded-xl border focus:outline-none transition-all",
+                "bg-gray-800 border-purple-500 text-white focus:ring-2 focus:ring-purple-400",
+                "bg-purple-50 border-purple-400 text-gray-900 focus:ring-2 focus:ring-purple-400"
               )}
               type="email"
               name="email"
-              placeholder={t("email", language)}
+              placeholder={t.email}
               value={loginData.email}
               onChange={handleLoginChange}
+              whileFocus={{ scale: 1.02 }}
               required
-              autoFocus
+              dir={isRTL ? "rtl" : "ltr"}
             />
-            <input
+            <motion.input
               className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
+                "p-4 rounded-xl border focus:outline-none transition-all",
+                "bg-gray-800 border-purple-500 text-white focus:ring-2 focus:ring-purple-400",
+                "bg-purple-50 border-purple-400 text-gray-900 focus:ring-2 focus:ring-purple-400"
               )}
               type="password"
               name="password"
-              placeholder={t("password", language)}
+              placeholder={t.password}
               value={loginData.password}
               onChange={handleLoginChange}
+              whileFocus={{ scale: 1.02 }}
               required
+              dir={isRTL ? "rtl" : "ltr"}
             />
-            <button
+            <motion.button
               type="submit"
-              className={themedClass(
-                "p-3 rounded font-semibold mt-2 transition",
-                "bg-green-700 text-white hover:bg-green-600",
-                "bg-green-600 text-white hover:bg-green-700"
-              )}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(128,0,128,0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="p-4 rounded-full font-bold mt-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all"
             >
-              {t("loginBtn", language)}
-            </button>
+              {t.loginBtn}
+            </motion.button>
             <p
-              className={themedClass(
-                "mt-2 cursor-pointer text-center underline",
-                "text-green-200 hover:text-green-400",
-                "text-green-700 hover:text-green-900"
-              )}
+              className="mt-2 cursor-pointer text-center text-purple-300 hover:text-purple-500 underline"
               onClick={() => {
                 setError("");
                 setIsLogin(false);
               }}
             >
-              {t("noAccount", language)}
+              {t.switchToSignup}
             </p>
           </form>
         ) : (
+          // Signup Form
           <form onSubmit={handleSignUpSubmit} className="flex flex-col gap-4">
-            <input
-              className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
-              )}
-              type="text"
-              name="firstName"
-              placeholder={t("firstName", language)}
-              value={signUpData.firstName}
-              onChange={handleSignUpChange}
-              required
-            />
-            <input
-              className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
-              )}
-              type="text"
-              name="lastName"
-              placeholder={t("lastName", language)}
-              value={signUpData.lastName}
-              onChange={handleSignUpChange}
-              required
-            />
-            <input
-              className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
-              )}
-              type="email"
-              name="email"
-              placeholder={t("email", language)}
-              value={signUpData.email}
-              onChange={handleSignUpChange}
-              required
-            />
-            <input
-              className={themedClass(
-                "p-3 rounded border focus:outline-none transition",
-                "bg-[#222] border-green-700 text-green-100 focus:ring-2 focus:ring-green-400",
-                "bg-green-50 border-green-400 text-green-900 focus:ring-2 focus:ring-green-700"
-              )}
-              type="password"
-              name="password"
-              placeholder={t("password", language)}
-              value={signUpData.password}
-              onChange={handleSignUpChange}
-              required
-            />
-            <button
+            {["firstName", "lastName", "email", "password"].map((field) => (
+              <motion.input
+                key={field}
+                className={themedClass(
+                  "p-4 rounded-xl border focus:outline-none transition-all",
+                  "bg-gray-800 border-purple-500 text-white focus:ring-2 focus:ring-purple-400",
+                  "bg-purple-50 border-purple-400 text-gray-900 focus:ring-2 focus:ring-purple-400"
+                )}
+                type={field === "password" ? "password" : "text"}
+                name={field}
+                placeholder={t[field]}
+                value={signUpData[field]}
+                onChange={handleSignUpChange}
+                whileFocus={{ scale: 1.02 }}
+                required
+                dir={isRTL ? "rtl" : "ltr"}
+              />
+            ))}
+            <motion.button
               type="submit"
-              className={themedClass(
-                "p-3 rounded font-semibold mt-2 transition",
-                "bg-green-700 text-white hover:bg-green-600",
-                "bg-green-600 text-white hover:bg-green-700"
-              )}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(128,0,128,0.5)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="p-4 rounded-full font-bold mt-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all"
             >
-              {t("signupBtn", language)}
-            </button>
+              {t.signupBtn}
+            </motion.button>
             <p
-              className={themedClass(
-                "mt-2 cursor-pointer text-center underline",
-                "text-green-200 hover:text-green-400",
-                "text-green-700 hover:text-green-900"
-              )}
+              className="mt-2 cursor-pointer text-center text-purple-300 hover:text-purple-500 underline"
               onClick={() => {
                 setError("");
                 setIsLogin(true);
               }}
             >
-              {t("haveAccount", language)}
+              {t.switchToLogin}
             </p>
           </form>
         )}
 
         {error && (
-          <p
-            className={themedClass(
-              "mt-4 text-center font-semibold",
-              "text-red-400",
-              "text-red-600"
-            )}
+          <motion.p
+            className="mt-4 text-center font-semibold text-red-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
           >
             {error}
-          </p>
+          </motion.p>
         )}
-      </div>
-
-      {/* Animated Feature Carousel */}
-      <div className="relative z-10 mt-10 w-full flex justify-center">
-        <div
-          className={`
-            max-w-md w-full px-6 py-4 rounded-lg shadow-md
-            bg-white/80 dark:bg-gray-900/80
-            flex flex-col items-center
-            transition-all duration-700
-            animate-fadeIn
-          `}
-          style={{
-            minHeight: 90,
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
-          }}
-        >
-          <div className="flex items-center gap-3">
-            <svg className="w-8 h-8 text-green-500 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" strokeWidth="2" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12l2 2 4-4" />
-            </svg>
-            <div>
-              <div className="font-bold text-lg text-green-700 dark:text-green-200 transition-all duration-500">
-                {features[featureIdx].title}
-              </div>
-              <div className="text-gray-700 dark:text-gray-200 text-sm mt-1 transition-all duration-500">
-                {features[featureIdx].desc}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

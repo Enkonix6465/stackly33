@@ -1,432 +1,573 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/logo-dark.png';
+import React, { useState, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo-dark.png";
 
-const Header = () => {
+// Add translations for navigation menu
+const navTranslations = {
+  en: {
+    home: "Home",
+    home1: "Home 1",
+    home2: "Home 2",
+    about: "About Us",
+    services: "Services",
+    allServices: "All Services",
+    nutrition: "Personalized Nutrition",
+    mindful: "Mindful Movement",
+    sleep: "Sleep Optimization",
+    stress: "Stress Resilience",
+    holistic: "Holistic Detox",
+    wellness: "Wellness Coaching",
+    blog: "Blog",
+    contact: "Contact Us",
+    admin: "Admin Dashboard",
+    logout: "Logout",
+    language: "Language",
+    toggleLight: "Toggle Light Mode",
+    toggleDark: "Toggle Dark Mode",
+  },
+  ar: {
+    home: "الرئيسية",
+    home1: "الرئيسية 1",
+    home2: "الرئيسية 2",
+    about: "معلومات عنا",
+    services: "الخدمات",
+    allServices: "كل الخدمات",
+    nutrition: "التغذية الشخصية",
+    mindful: "الحركة الذهنية",
+    sleep: "تحسين النوم",
+    stress: "المرونة ضد التوتر",
+    holistic: "إزالة السموم الشاملة",
+    wellness: "تدريب العافية",
+    blog: "مدونة",
+    contact: "اتصل بنا",
+    admin: "لوحة الإدارة",
+    logout: "تسجيل خروج",
+    language: "اللغة",
+    toggleLight: "تبديل إلى الوضع الفاتح",
+    toggleDark: "تبديل إلى الوضع الداكن",
+  },
+  he: {
+    home: "בית",
+    home1: "בית 1",
+    home2: "בית 2",
+    about: "אודות",
+    services: "שירותים",
+    allServices: "כל השירותים",
+    nutrition: "תזונה מותאמת אישית",
+    mindful: "תנועה מודעת",
+    sleep: "אופטימיזציה לשינה",
+    stress: "חוסן ללחץ",
+    holistic: "ניקוי הוליסטי",
+    wellness: "אימון בריאות",
+    blog: "בלוג",
+    contact: "צור קשר",
+    admin: "לוח מנהל",
+    logout: "התנתקות",
+    language: "שפה",
+    toggleLight: "החלף למצב בהיר",
+    toggleDark: "החלף למצב כהה",
+  },
+};
+
+function Header(props) {
   const navigate = useNavigate();
-  const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const initials = "AB"; // Replace with user initials logic
+  const email = localStorage.getItem("email") || "";
+  const [language, setLanguage] = useState(() => localStorage.getItem("language") || "en");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const homeRef = useRef(null);
+  const servicesRef = useRef(null);
+  const avatarRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
   const homeDropdownTimeout = useRef();
   const servicesDropdownTimeout = useRef();
-  const [theme, setTheme] = useState('light');
-  const [language, setLanguage] = useState('en');
-  const [mobileHomeOpen, setMobileHomeOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-  // Simple translations map
-  const translations = {
-    en: {
-      home: 'Home',
-      home1: 'Home 1',
-      home2: 'Home 2',
-      about: 'About Us',
-      services: 'Services',
-      allServices: 'All Services',
-      nutrition: 'Personalized Nutrition',
-      mindful: 'Mindful Movement',
-      sleep: 'Sleep Optimization',
-      stress: 'Stress Resilience',
-      holistic: 'Holistic Detox',
-      wellness: 'Wellness Coaching',
-      blog: 'Blog',
-      contact: 'Contact Us',
-      languageLabel: 'Language',
-      english: 'English',
-      arabic: 'Arabic',
-      hebrew: 'Hebrew',
-      backToAdmin: 'Back to Admin Dashboard',
-      userDashboard: 'User Dashboard',
-      logout: 'Logout'
-    },
-    ar: {
-      home: 'الرئيسية',
-      home1: 'الصفحة الرئيسية 1',
-      home2: 'الصفحة الرئيسية 2',
-      about: 'معلومات عنا',
-      services: 'الخدمات',
-      allServices: 'كل الخدمات',
-      nutrition: 'التغذية الشخصية',
-      mindful: 'الحركة الواعية',
-      sleep: 'تحسين النوم',
-      stress: 'القدرة على التحمّل',
-      holistic: 'إزالة السموم الشاملة',
-      wellness: 'التدريب على العافية',
-      blog: 'المدونة',
-      contact: 'اتصل بنا',
-      languageLabel: 'اللغة',
-      english: 'الإنجليزية',
-      arabic: 'العربية',
-      hebrew: 'العبرية',
-      backToAdmin: 'العودة إلى لوحة تحكم المشرف',
-      userDashboard: 'لوحة تحكم المستخدم',
-      logout: 'تسجيل الخروج'
-    },
-    he: {
-      home: 'דף הבית',
-      home1: 'בית 1',
-      home2: 'בית 2',
-      about: 'עלינו',
-      services: 'שירותים',
-      allServices: 'כל השירותים',
-      nutrition: 'תזונה מותאמת אישית',
-      mindful: 'תנועה מודעת',
-      sleep: 'אופטימיזציית שינה',
-      stress: 'חוסן מול סטרס',
-      holistic: 'ניקוי רעלים הוליסטי',
-      wellness: 'אימון לאורח חיים בריא',
-      blog: 'בלוג',
-      contact: 'צור קשר',
-      languageLabel: 'שפה',
-      english: 'אנגלית',
-      arabic: 'ערבית',
-      hebrew: 'עברית',
-      backToAdmin: 'חזרה ללוח ניהול',
-      userDashboard: 'לוח משתמש',
-      logout: 'התנתקות'
+  // RTL support for Arabic/Hebrew
+  const isRTL = language === "ar" || language === "he";
+
+  // Theme toggle
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
+    window.dispatchEvent(new Event("theme-changed"));
   };
 
-  const t = (key) => translations[language]?.[key] || key;
+  // Utility for theme classes
+  const themedClass = (base, dark, light) =>
+    `${base} ${theme === "dark" ? dark : light}`;
 
-  // Initial theme setup
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(storedTheme);
-    const storedLang = localStorage.getItem('language') || 'en';
-    setLanguage(storedLang);
-  }, []);
+  // Utility for dropdown background
+  const themedDropdown = theme === "dark"
+    ? "bg-[#2d1847] border border-purple-900 text-white"
+    : "bg-white border border-gray-200 text-gray-800";
 
-  // Sync theme with localStorage and document root
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-    window.dispatchEvent(new Event('theme-changed'));
-  }, [theme]);
-
-  // Sync language with localStorage and document direction (RTL/LTR)
-  useEffect(() => {
-    localStorage.setItem('language', language);
-    const isRtl = language === 'ar' || language === 'he';
-    document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
-    window.dispatchEvent(new Event('language-changed'));
-  }, [language]);
-
-  // Listen for theme changes from other tabs/pages
-  useEffect(() => {
-    const handleThemeChange = () => {
-      const newTheme = localStorage.getItem('theme') || 'light';
-      setTheme(newTheme);
-    };
-    window.addEventListener('theme-changed', handleThemeChange);
-    window.addEventListener('storage', handleThemeChange);
-    return () => {
-      window.removeEventListener('theme-changed', handleThemeChange);
-      window.removeEventListener('storage', handleThemeChange);
-    };
-  }, []);
-
-  const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  const toggleMobileMenu = () => setIsMobileMenuOpen(prev => !prev);
-
-  // Get user initials
-  const getInitials = () => {
-    const firstname = (localStorage.getItem('firstname') || '').trim();
-    const lastname = (localStorage.getItem('lastname') || '').trim();
-    let initials = '';
-    if (firstname) initials += firstname[0].toUpperCase();
-    if (lastname) initials += lastname[0].toUpperCase();
-    return initials || '?';
+  // Language change handler: update localStorage and dispatch event
+  const handleLanguageChange = (newLang) => {
+    setLanguage(newLang);
+    localStorage.setItem("language", newLang);
+    window.dispatchEvent(new Event("language-changed"));
   };
-
-  const email = (localStorage.getItem('email') || '').trim();
-  const initials = getInitials();
-
-  // Mobile menu links
-  const mobileLinks = (
-    <nav className="flex flex-col space-y-2 mt-6">
-      {/* Home Dropdown */}
-      <button
-        className="flex justify-between items-center py-2 px-4 hover:bg-green-100 rounded font-semibold"
-        onClick={() => setMobileHomeOpen((prev) => !prev)}
-      >
-        {t('home')}
-        <svg className={`w-4 h-4 ml-2 transition-transform ${mobileHomeOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {mobileHomeOpen && (
-        <div className="pl-6 flex flex-col space-y-1">
-          <Link to="/home1" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('home1')}</Link>
-          <Link to="/home2" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('home2')}</Link>
-        </div>
-      )}
-
-      <Link to="/about" className="py-2 px-4 hover:bg-green-100 rounded" onClick={toggleMobileMenu}>{t('about')}</Link>
-
-      {/* Services Dropdown */}
-      <button
-        className="flex justify-between items-center py-2 px-4 hover:bg-green-100 rounded font-semibold"
-        onClick={() => setMobileServicesOpen((prev) => !prev)}
-      >
-        {t('services')}
-        <svg className={`w-4 h-4 ml-2 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {mobileServicesOpen && (
-        <div className="pl-6 flex flex-col space-y-1">
-          <Link to="/services" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('allServices')}</Link>
-          <Link to="/Nutrition" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('nutrition')}</Link>
-          <Link to="/Mindful" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('mindful')}</Link>
-          <Link to="/Sleep" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('sleep')}</Link>
-          <Link to="/Stress" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('stress')}</Link>
-          <Link to="/Holistic" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('holistic')}</Link>
-          <Link to="/Wellness" className="py-2 px-4 hover:bg-green-50 rounded" onClick={toggleMobileMenu}>{t('wellness')}</Link>
-        </div>
-      )}
-
-      <Link to="/blog" className="py-2 px-4 hover:bg-green-100 rounded" onClick={toggleMobileMenu}>{t('blog')}</Link>
-      <Link to="/contact" className="py-2 px-4 hover:bg-green-100 rounded" onClick={toggleMobileMenu}>{t('contact')}</Link>
-    </nav>
-  );
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-300
-        ${theme === 'dark' ? 'bg-[#000] border-b border-[#141B25]' : 'bg-white border-b border-gray-200'}`}
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-colors duration-300 ${
+        theme === "dark"
+          ? "bg-[#000] border-b border-[#141B25]"
+          : "bg-white border-b border-gray-200"
+      }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div
+          className={`flex justify-between items-center h-20 ${
+            isRTL ? "flex-row-reverse" : ""
+          }`}
+        >
           {/* Logo */}
-          <div className="flex pl-4 sm:pl-6 lg:pl-14 items-center">
-            <button onClick={() => navigate('/home1')} className="focus:outline-none">
-              <img src={logo} alt="STACKLY" className="h-6 sm:h-8 w-auto" />
+          <div className="flex items-center">
+            <button
+              onClick={() => navigate("/home1")}
+              className="focus:outline-none"
+              aria-label="Go to home"
+            >
+              <img src={logo} alt="Logo" className="h-6 sm:h-8 w-auto" />
             </button>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden min-[480px]:flex items-center space-x-8">
+          {/* Desktop Menu */}
+          <div
+            className={`hidden min-[480px]:flex items-center ${
+              isRTL ? "space-x-reverse" : ""
+            }`}
+            style={{ gap: 20 }}
+          >
             {/* Home Dropdown */}
             <div
+              ref={homeRef}
               className="relative"
-              onMouseEnter={() => { if (homeDropdownTimeout.current) clearTimeout(homeDropdownTimeout.current); setIsHomeDropdownOpen(true); }}
-              onMouseLeave={() => { homeDropdownTimeout.current = setTimeout(() => setIsHomeDropdownOpen(false), 200); }}
+              onMouseEnter={() => {
+                if (homeDropdownTimeout.current)
+                  clearTimeout(homeDropdownTimeout.current);
+                setIsHomeDropdownOpen(true);
+              }}
+              onMouseLeave={() => {
+                homeDropdownTimeout.current = setTimeout(
+                  () => setIsHomeDropdownOpen(false),
+                  200
+                );
+              }}
             >
               <button
-                onClick={() => navigate('/home1')}
-                className={`flex items-center ${theme === 'dark' ? 'text-white' : 'text-black'} hover:text-green-500 transition-colors duration-200`}
+                className={`flex items-center px-2 py-1 rounded ${
+                  theme === "dark" ? "text-white" : "text-black"
+                } hover:text-purple-500 focus:outline-none`}
                 aria-haspopup="true"
                 aria-expanded={isHomeDropdownOpen}
               >
-                {t('home')}
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                {navTranslations[language].home}
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
+
               {isHomeDropdownOpen && (
-                <div className={`absolute top-full left-0 mt-2 w-48 rounded-md shadow-lg border py-2 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}>
-                  <Link to="/home1" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsHomeDropdownOpen(false)}>{t('home1')}</Link>
-                  <Link to="/home2" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsHomeDropdownOpen(false)}>{t('home2')}</Link>
+                <div
+                  className={`absolute top-full mt-2 w-48 rounded-md shadow-lg py-2 z-50 ${themedDropdown} ${isRTL ? "right-0 left-auto" : "left-0"}`}
+                >
+                  <Link
+                    to="/home1"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].home1}
+                  </Link>
+                  <Link
+                    to="/home2"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].home2}
+                  </Link>
                 </div>
               )}
             </div>
 
-            <Link to="/about" className={`${theme === 'dark' ? 'text-white' : 'text-black'} hover:text-green-500 transition-colors duration-200`}>{t('about')}</Link>
+            {/* About */}
+            <Link
+              to="/about"
+              className={`px-2 py-1 rounded ${
+                theme === "dark" ? "text-white" : "text-black"
+              } hover:text-purple-500`}
+            >
+              {navTranslations[language].about}
+            </Link>
 
             {/* Services Dropdown */}
             <div
+              ref={servicesRef}
               className="relative"
-              onMouseEnter={() => { if (servicesDropdownTimeout.current) clearTimeout(servicesDropdownTimeout.current); setIsServicesDropdownOpen(true); }}
-              onMouseLeave={() => { servicesDropdownTimeout.current = setTimeout(() => setIsServicesDropdownOpen(false), 200); }}
+              onMouseEnter={() => {
+                if (servicesDropdownTimeout.current)
+                  clearTimeout(servicesDropdownTimeout.current);
+                setIsServicesDropdownOpen(true);
+              }}
+              onMouseLeave={() => {
+                servicesDropdownTimeout.current = setTimeout(
+                  () => setIsServicesDropdownOpen(false),
+                  200
+                );
+              }}
             >
               <button
-                onClick={() => navigate('/services')}
-                className={`flex items-center ${theme === 'dark' ? 'text-white' : 'text-black'} hover:text-green-500 transition-colors duration-200`}
+                className={`flex items-center px-2 py-1 rounded ${
+                  theme === "dark" ? "text-white" : "text-black"
+                } hover:text-purple-500 focus:outline-none`}
                 aria-haspopup="true"
                 aria-expanded={isServicesDropdownOpen}
               >
-                {t('services')}
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                {navTranslations[language].services}
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
+
               {isServicesDropdownOpen && (
-                <div className={`absolute top-full left-0 mt-2 w-48 rounded-md shadow-lg border py-2 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}>
-                  <Link to="/services" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('allServices')}</Link>
-                  <Link to="/Nutrition" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('nutrition')}</Link>
-                  <Link to="/Mindful" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('mindful')}</Link>
-                  <Link to="/Sleep" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('sleep')}</Link>
-                  <Link to="/Stress" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('stress')}</Link>
-                  <Link to="/Holistic" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('holistic')}</Link>
-                  <Link to="/Wellness" className={`block px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-[#22304a]' : 'text-gray-800 hover:bg-green-100'}`} onClick={() => setIsServicesDropdownOpen(false)}>{t('wellness')}</Link>
+                <div
+                  className={`absolute top-full mt-2 w-56 rounded-md shadow-lg py-2 z-50 ${themedDropdown} ${isRTL ? "right-0 left-auto" : "left-0"}`}
+                >
+                  <Link
+                    to="/services"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].allServices}
+                  </Link>
+                  <Link
+                    to="/Nutrition"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].nutrition}
+                  </Link>
+                  <Link
+                    to="/Mindful"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].mindful}
+                  </Link>
+                  <Link
+                    to="/Sleep"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].sleep}
+                  </Link>
+                  <Link
+                    to="/Stress"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].stress}
+                  </Link>
+                  <Link
+                    to="/Holistic"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].holistic}
+                  </Link>
+                  <Link
+                    to="/Wellness"
+                    className="block px-4 py-2 hover:bg-purple-900/20"
+                  >
+                    {navTranslations[language].wellness}
+                  </Link>
                 </div>
               )}
             </div>
 
-            <Link to="/blog" className={`${theme === 'dark' ? 'text-white' : 'text-black'} hover:text-green-500 transition-colors duration-200`}>{t('blog')}</Link>
-            <Link to="/contact" className={`${theme === 'dark' ? 'text-white' : 'text-black'} hover:text-green-500 transition-colors duration-200`}>{t('contact')}</Link>
-
-            {/* Dark Mode Toggle */}
-            <button
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors duration-200 ${theme === 'dark' ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-green-100 border-green-300 hover:bg-green-200'}`}
-              onClick={toggleTheme}
-              aria-label="Toggle dark mode"
+            {/* Blog & Contact */}
+            <Link
+              to="/blog"
+              className={`px-2 py-1 rounded ${
+                theme === "dark" ? "text-white" : "text-black"
+              } hover:text-purple-500`}
             >
-              {theme === 'dark' ? (
-                <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-8.66h-1M4.34 12H3m15.07 4.93l-.71-.71M6.34 6.34l-.71-.71m12.02 12.02l-.71-.71M6.34 17.66l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              {navTranslations[language].blog}
+            </Link>
+            <Link
+              to="/contact"
+              className={`px-2 py-1 rounded ${
+                theme === "dark" ? "text-white" : "text-black"
+              } hover:text-purple-500`}
+            >
+              {navTranslations[language].contact}
+            </Link>
+
+            {/* Language Selector */}
+            <div>
+              <label className="sr-only">{navTranslations[language].language}</label>
+              <select
+                value={language}
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                aria-label={navTranslations[language].language}
+              >
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="he">עברית</option>
+              </select>
+            </div>
+
+            {/* Theme Toggle */}
+            <button
+              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${
+                theme === "dark"
+                  ? "bg-gray-800 border-gray-700 hover:bg-gray-700"
+                  : "bg-purple-100 border-purple-300 hover:bg-purple-200"
+              }`}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <svg
+                  className="w-5 h-5 text-purple-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m8.66-8.66h-1M4.34 12H3m15.07 4.93l-.71-.71M6.34 6.34l-.71-.71m12.02 12.02l-.71-.71M6.34 17.66l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
                 </svg>
               ) : (
-                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                <svg
+                  className="w-5 h-5 text-purple-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
                 </svg>
               )}
             </button>
 
-            {/* Language Selector */}
-            <div className="flex items-center">
-              <label htmlFor="language-select" className={`mr-2 text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{t('languageLabel')}:</label>
-              <select
-                id="language-select"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className={`text-sm rounded-md border px-2 py-1 focus:outline-none ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-300 text-gray-800'}`}
-              >
-                <option value="en">{t('english')}</option>
-                <option value="ar">{t('arabic')}</option>
-                <option value="he">{t('hebrew')}</option>
-              </select>
-            </div>
-
-            {/* Avatar Dropdown */}
-            <div className="relative">
+            {/* Avatar */}
+            <div
+              ref={avatarRef}
+              className="relative"
+              onClick={() => setIsAvatarDropdownOpen((prev) => !prev)}
+            >
               <button
-                className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-semibold focus:outline-none"
-                onClick={() => setIsAvatarDropdownOpen(prev => !prev)}
+                className="ml-4 w-10 h-10 flex items-center justify-center rounded-full bg-purple-500 text-white font-semibold focus:outline-none"
+                aria-haspopup="true"
+                aria-expanded={isAvatarDropdownOpen}
               >
                 {initials}
               </button>
+
               {isAvatarDropdownOpen && (
-                <div className={`absolute right-0 mt-2 w-40 rounded-md shadow-lg border py-2 z-50 ${theme === 'dark' ? 'bg-[#1E2A38] border-[#141B25]' : 'bg-white border-gray-200'}`}>
-                  {email === 'admin@enkonix.in' && (
+                <div
+                  className={`absolute mt-2 w-44 rounded-md shadow-lg py-2 z-50 ${themedDropdown} ${isRTL ? "left-0 right-auto" : "right-0 left-auto"}`}
+                >
+                  {email === "admin@enkonix.in" && (
                     <button
-                      className={`block w-full text-left px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-green-500' : 'text-gray-800 hover:bg-green-100'}`}
-                      onClick={() => { setIsAvatarDropdownOpen(false); navigate('/admindashboard'); }}
+                      className="block w-full text-left px-4 py-2 hover:bg-purple-900/20"
+                      onClick={() => {
+                        setIsAvatarDropdownOpen(false);
+                        navigate("/admindashboard");
+                      }}
                     >
-                      {t('backToAdmin')}
-                    </button>
-                  )}
-                  {email && email !== 'admin@enkonix.in' && (
-                    <button
-                      className={`block w-full text-left px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-green-500' : 'text-gray-800 hover:bg-green-100'}`}
-                      onClick={() => { setIsAvatarDropdownOpen(false); navigate('/userdashboard'); }}
-                    >
-                      {t('userDashboard')}
+                      {navTranslations[language].admin}
                     </button>
                   )}
                   <button
-                    className={`block w-full text-left px-4 py-2 ${theme === 'dark' ? 'text-white hover:bg-green-500' : 'text-gray-800 hover:bg-green-100'}`}
-                    onClick={() => { setIsAvatarDropdownOpen(false); window.location.href = '/'; }}
+                    className="block w-full text-left px-4 py-2 hover:bg-purple-900/20"
+                    onClick={() => {
+                      localStorage.removeItem("email");
+                      localStorage.removeItem("firstname");
+                      localStorage.removeItem("lastname");
+                      window.location.href = "/";
+                    }}
                   >
-                    {t('logout')}
+                    {navTranslations[language].logout}
                   </button>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Mobile Hamburger Icon */}
-          <div className="min-[480px]:hidden flex items-center">
-            <button
-              className={`p-2 rounded-md focus:outline-none ${theme === 'dark' ? 'text-white' : 'text-black'}`}
-              onClick={toggleMobileMenu}
-              aria-label="Open menu"
-            >
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="min-[480px]:hidden ml-4 px-3 py-2 rounded bg-purple-500 text-white"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            aria-label="Open mobile menu"
+          >
+            ☰
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className={`fixed top-20 left-0 right-0 bg-white z-40 shadow-lg border-t border-gray-200 min-[480px]:hidden`}>
-          {mobileLinks}
-          <div className="flex items-center justify-between px-4 py-4 border-t">
-            {/* Theme Toggle */}
-            <button
-              className={`w-10 h-10 rounded-full border flex items-center justify-center transition-colors duration-200 ${theme === 'dark' ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-green-100 border-green-300 hover:bg-green-200'}`}
-              onClick={toggleTheme}
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'dark' ? (
-                <svg className="w-5 h-5 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m8.66-8.66h-1M4.34 12H3m15.07 4.93l-.71-.71M6.34 6.34l-.71-.71m12.02 12.02l-.71-.71M6.34 17.66l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
-            </button>
-            {/* Language Selector */}
-            <div className="flex items-center">
-              <label htmlFor="mobile-language-select" className="mr-2 text-sm text-gray-700">{t('languageLabel')}:</label>
+        <div
+          ref={mobileMenuRef}
+          className={`${theme === "dark" ? "bg-[#2d1847]" : "bg-white"} px-6 py-4 border-t`}
+        >
+          <nav className="space-y-4">
+            {/* Home (expandable) */}
+            <details>
+              <summary className={`cursor-pointer py-2 ${theme === "dark" ? "text-white" : "text-black"}`}>
+                {navTranslations[language].home}
+              </summary>
+              <div className="pl-4 flex flex-col space-y-2">
+                <Link to="/home1" className="hover:text-purple-500">
+                  {navTranslations[language].home1}
+                </Link>
+                <Link to="/home2" className="hover:text-purple-500">
+                  {navTranslations[language].home2}
+                </Link>
+              </div>
+            </details>
+
+            {/* About */}
+            <Link to="/about" className={`block ${theme === "dark" ? "text-white" : "text-black"} hover:text-purple-500`}>
+              {navTranslations[language].about}
+            </Link>
+
+            {/* Services (expandable) */}
+            <details>
+              <summary className={`cursor-pointer py-2 ${theme === "dark" ? "text-white" : "text-black"}`}>
+                {navTranslations[language].services}
+              </summary>
+              <div className="pl-4 flex flex-col space-y-2">
+                <Link to="/services" className="hover:text-purple-500">
+                  {navTranslations[language].allServices}
+                </Link>
+                <Link to="/Nutrition" className="hover:text-purple-500">
+                  {navTranslations[language].nutrition}
+                </Link>
+                <Link to="/Mindful" className="hover:text-purple-500">
+                  {navTranslations[language].mindful}
+                </Link>
+                <Link to="/Sleep" className="hover:text-purple-500">
+                  {navTranslations[language].sleep}
+                </Link>
+                <Link to="/Stress" className="hover:text-purple-500">
+                  {navTranslations[language].stress}
+                </Link>
+                <Link to="/Holistic" className="hover:text-purple-500">
+                  {navTranslations[language].holistic}
+                </Link>
+                <Link to="/Wellness" className="hover:text-purple-500">
+                  {navTranslations[language].wellness}
+                </Link>
+              </div>
+            </details>
+
+            {/* Blog & Contact */}
+            <Link to="/blog" className={`block ${theme === "dark" ? "text-white" : "text-black"} hover:text-purple-500`}>
+              {navTranslations[language].blog}
+            </Link>
+            <Link to="/contact" className={`block ${theme === "dark" ? "text-white" : "text-black"} hover:text-purple-500`}>
+              {navTranslations[language].contact}
+            </Link>
+
+            {/* Mobile Language Selector */}
+            <div>
+              <label className="block text-sm font-medium mb-1">{navTranslations[language].language}</label>
               <select
-                id="mobile-language-select"
                 value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                className="text-sm rounded-md border px-2 py-1 focus:outline-none bg-white border-gray-300 text-gray-800"
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="w-full border rounded-md px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
               >
-                <option value="en">{t('english')}</option>
-                <option value="ar">{t('arabic')}</option>
-                <option value="he">{t('hebrew')}</option>
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="he">עברית</option>
               </select>
             </div>
-            {/* Avatar */}
-            <div className="relative">
-              <button
-                className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center text-white font-semibold focus:outline-none"
-                onClick={() => setIsAvatarDropdownOpen(prev => !prev)}
-              >
-                {initials}
-              </button>
-              {isAvatarDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg border py-2 z-50 bg-white border-gray-200">
-                  {email === 'admin@enkonix.in' && (
-                    <button
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-100"
-                      onClick={() => { setIsAvatarDropdownOpen(false); navigate('/admindashboard'); toggleMobileMenu(); }}
-                    >
-                      {t('backToAdmin')}
-                    </button>
-                  )}
-                  {email && email !== 'admin@enkonix.in' && (
-                    <button
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-100"
-                      onClick={() => { setIsAvatarDropdownOpen(false); navigate('/userdashboard'); toggleMobileMenu(); }}
-                    >
-                      {t('userDashboard')}
-                    </button>
-                  )}
-                  <button
-                    className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-100"
-                    onClick={() => { setIsAvatarDropdownOpen(false); window.location.href = '/'; toggleMobileMenu(); }}
-                  >
-                    {t('logout')}
-                  </button>
-                </div>
+
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`w-full py-2 rounded-md border mt-3 flex items-center justify-center transition-colors ${
+                theme === "dark"
+                  ? "bg-purple-900 border-purple-700 hover:bg-purple-800 text-white"
+                  : "bg-purple-100 border-purple-300 hover:bg-purple-200 text-purple-700"
+              }`}
+            >
+              {theme === "dark"
+                ? navTranslations[language].toggleLight
+                : navTranslations[language].toggleDark}
+            </button>
+
+            {/* Avatar info + actions (mobile) */}
+            <div className="border-t pt-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-2">
+                {initials} ({email || "guest"})
+              </p>
+              {email === "admin@enkonix.in" && (
+                <button
+                  className="block w-full text-left py-2 hover:text-purple-500"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    navigate("/admindashboard");
+                  }}
+                >
+                  {navTranslations[language].admin}
+                </button>
               )}
+              <button
+                className="block w-full text-left py-2 hover:text-purple-500"
+                onClick={() => {
+                  localStorage.removeItem("email");
+                  localStorage.removeItem("firstname");
+                  localStorage.removeItem("lastname");
+                  window.location.href = "/";
+                }}
+              >
+                {navTranslations[language].logout}
+              </button>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </header>
   );
-};
+}
 
 export default Header;
