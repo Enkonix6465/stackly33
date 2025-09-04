@@ -1,8 +1,3 @@
-/* Remove non-standard at-rules for W3C validation compatibility */
-
-/* Remove these lines:
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
-*/
-
-/* Place only standard CSS here for validation. If you use Tailwind, keep those at-rules in your build config or source files, not in public CSS.
+/* Remove invalid lines. If you need Tailwind, use index.css with @tailwind directives. */
